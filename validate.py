@@ -56,9 +56,12 @@ for mode in range(3):
 	vgpio.ReleaseTestTXButton()
 	time.sleep(5)
 
-vgpio.Cleanup()
+
 
 test_serial_port_obj.close()
 standard_serial_port_obj.close()
+test_serial_thread.join()
+
+vgpio.Cleanup()
 
 sys.exit(0)
