@@ -78,6 +78,28 @@ while not standard_serial_queue.empty():
 		break
 print(f"{time.asctime()} Done.")
 
+"""
+Check that the TEST_TX button generates a packet with the correct callsign.
+"""
+print(f"{time.asctime()} Pressing TEST_TX button.")
+vgpio.AssertTestTXButton()
+time.sleep(.1)
+vgpio.ReleaseTestTXButton()
+time.sleep(1)
+count = 0
+start_time = time.time()
+while not standard_serial_queue.empty():
+	packet = standard_serial_queue.get()
+	count += 1
+	metadata = vpacket.GetFrameMeta(packet)
+	print(f'{time.asctime()} STANDARD device heard packet from {metadata["SOURCE"]} to {metadata["DEST"]} CRC {metadata["CRC"]}.')
+	print(f"{time.asctime()} Packet payload: {str(metadata['Payload'])}")
+	if time.time() - start_time > 2:
+		break
+print(f"{time.asctime()} Done.")
+
+
+
 vgpio.SetTestDeviceMode(4)
 vgpio.SetStandardDeviceMode(4)
 time.sleep(2)
