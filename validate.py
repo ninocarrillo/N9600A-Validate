@@ -14,9 +14,7 @@ import sys
 import time
 import RPi.GPIO as gpio
 import subprocess
-import validate_functions as val
-
-
+import validate_gpio_functions as vgpio
 
 if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
@@ -24,10 +22,10 @@ if sys.version_info < (3, 0):
 
 gpio.setmode(gpio.BCM)
 
-val.SetupGPIO()
+vgpio.SetupGPIO()
 
-val.SetTestDeviceMode(4)
-val.SetStandardDeviceMode(4)
+vgpio.SetTestDeviceMode(4)
+vgpio.SetStandardDeviceMode(4)
 time.sleep(2)
 
 subprocess.run(["aplay", "/home/pi/github/modem-test-audio/1_single/GFSK_4800_IL2Pc_50b_1x.wav"])
@@ -35,15 +33,15 @@ subprocess.run(["aplay", "/home/pi/github/modem-test-audio/1_single/GFSK_4800_IL
 time.sleep(1)
 
 for mode in range(16):
-	val.SetTestDeviceMode(mode)
+	vgpio.SetTestDeviceMode(mode)
 	print("Test Mode: ", mode)
-	val.SetStandardDeviceMode(mode)
+	vgpio.SetStandardDeviceMode(mode)
 	print("Standard Mode: ", mode)
 	time.sleep(2)
 
-	val.AssertTestTXButton()
+	vgpio.AssertTestTXButton()
 	time.sleep(.1)
-	val.ReleaseTestTXButton()
+	vgpio.ReleaseTestTXButton()
 	time.sleep(5)
 gpio.cleanup()
 

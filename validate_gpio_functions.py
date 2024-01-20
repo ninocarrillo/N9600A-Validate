@@ -1,4 +1,4 @@
-# validate_functions.py
+# validate_gpio_functions.py
 # Python3
 # Support validate.py
 # Nino Carrillo
