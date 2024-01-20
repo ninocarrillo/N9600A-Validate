@@ -25,8 +25,8 @@ test_serial_port_baud = "57600"
 standard_serial_port = "/dev/ttyACM1"
 standard_serial_port_baud = "57600"
 path_to_test_audio = "/home/pi/github/modem-test-audio/"
-test_callsign = "0TEST0"
-standard_callsign = "STNDRD"
+test_callsign = "0TEST0-5"
+standard_callsign = "STNDRD-7"
 
 if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
