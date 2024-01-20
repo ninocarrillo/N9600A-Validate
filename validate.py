@@ -60,7 +60,7 @@ print(f"Test device heard {count} frames.")
 for mode in range(16):
 	vgpio.SetTestDeviceMode(mode)
 	vgpio.SetStandardDeviceMode(mode)
-	print(f"Generating test packet in MODE {format(mode, '4b')}")
+	print(f"Generating test packet in MODE {format(mode, '04b')}")
 	time.sleep(2)
 
 	vgpio.AssertTestTXButton()
