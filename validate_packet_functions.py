@@ -15,10 +15,10 @@ def GetKISSFrameMeta(frame):
 	this['CRC'] = crc.CalcCRC16(frame[1:])
 	count = len(frame)
 	index = 0
-	if (count > 15):
+	if (count > 14):
 		valid_header = 1
 		address_extension_bit = 0
-		index = 1
+		index = 0
 		subfield_character_index = 0
 		subfield_index = 0
 		while address_extension_bit == 0:
