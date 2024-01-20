@@ -33,7 +33,7 @@ vthread.popen_and_call(print("Playback complete"), ["aplay", "/home/pi/github/mo
 
 time.sleep(5)
 
-for mode in range(16):
+for mode in range(3):
 	vgpio.SetTestDeviceMode(mode)
 	print("Test Mode: ", mode)
 	vgpio.SetStandardDeviceMode(mode)
