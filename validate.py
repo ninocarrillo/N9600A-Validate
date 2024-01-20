@@ -40,11 +40,11 @@ vgpio.SetTestDeviceMode(4)
 vgpio.SetStandardDeviceMode(4)
 time.sleep(2)
 
-#subprocess.run(["aplay", "/home/pi/github/modem-test-audio/1_single/GFSK_4800_IL2Pc_50b_1x.wav"])
+subprocess.run(["aplay", "/home/pi/github/modem-test-audio/2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
 
-vthread.popen_and_call(vthread.end_do_nothing, ["aplay", "/home/pi/github/modem-test-audio/1_single/GFSK_4800_IL2Pc_50b_1x.wav"])
+#vthread.popen_and_call(vthread.end_do_nothing, ["aplay", "/home/pi/github/modem-test-audio/2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
 
-time.sleep(5)
+time.sleep(2)
 
 while not test_serial_queue.empty():
 	print(test_serial_queue.get())

@@ -20,7 +20,7 @@ def ReadFromPort(serial_port, queue):
 					elif ord(input_data) == 0xC0: # FEND
 						if len(kiss_frame) > 0:
 							frame_count += 1
-							queue.put(kiss_frame, frame_count)
+							queue.put(kiss_frame)
 							kiss_frame = []
 						else:
 							kiss_frame = []
