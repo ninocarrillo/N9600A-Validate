@@ -44,7 +44,7 @@ def GetKISSFrameMeta(frame):
 				# This is the SSID characters
 				# Get bits
 				buffer += '-'
-				buffer += chr((working_character & 0b1111) + 0x20)
+				buffer += str(chr((working_character & 0b1111) + 0x20))
 				if (working_character & 0b10000000):
 					# C or H bit is set
 					buffer += '*'
