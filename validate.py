@@ -65,9 +65,9 @@ print(f"{time.asctime()} Done.")
 count = 0
 start_time = time.time()
 while not standard_serial_queue.empty():
-	#standard_serial_queue.get()
+	frame = standard_serial_queue.get()
 	count += 1
-	print(standard_serial_queue.get())
+	print(f'Frame CRC value: {crc.CalcCRC16(frame)}')
 	if time.time() - start_time > 2:
 		break
 print(f"STANDARD device heard {count} frames.")
