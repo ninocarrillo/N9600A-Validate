@@ -68,18 +68,21 @@ start_time = time.time()
 while not standard_serial_queue.empty():
 	frame = standard_serial_queue.get()
 	count += 1
-	print(f'Frame CRC value: {crc.CalcCRC16(frame[1:])}')
+	metadata = vpacket.GetKISSFrameMeta(frame)
+	print(f'STANDARD device heard CRC value: {metadata['CRC']}, Source Callsign {metadata['SOURCE']})
+	#print(f'STANDARD device heard CRC value: {vpacket.GetCRCFromKISS(frame)}, Source Callsign {vpacket.GetSourceFromKISS(frame)}.')
 	if time.time() - start_time > 2:
 		break
 print(f"STANDARD device heard {count} frames.")
 
 vgpio.SetTestDeviceMode(4)
 vgpio.SetStandardDeviceMode(4)
+time.sleep(2)
 subprocess.run(["aplay", path_to_test_audio + "2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
 
 #vthread.popen_and_call(vthread.end_do_nothing, ["aplay", "/home/pi/github/modem-test-audio/2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
 
-time.sleep(2)
+
 
 count = 0
 while not test_serial_queue.empty():
