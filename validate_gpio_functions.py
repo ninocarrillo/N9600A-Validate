@@ -7,7 +7,12 @@
 
 import RPi.GPIO as gpio
 
+def Cleanup():
+	gpio.cleanup()
+	return
+
 def SetupGPIO():
+	gpio.setmode(gpio.BCM)
 	# Test Device MODE3 Switch
 	gpio.setup(17,gpio.OUT)
 	gpio.output(17, gpio.LOW)

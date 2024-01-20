@@ -12,7 +12,6 @@
 import serial
 import sys
 import time
-import RPi.GPIO as gpio
 import subprocess
 import validate_gpio_functions as vgpio
 
@@ -20,7 +19,6 @@ if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
 	sys.exit(1)
 
-gpio.setmode(gpio.BCM)
 
 vgpio.SetupGPIO()
 
@@ -43,6 +41,7 @@ for mode in range(16):
 	time.sleep(.1)
 	vgpio.ReleaseTestTXButton()
 	time.sleep(5)
-gpio.cleanup()
+
+vgpio.Cleanup()
 
 sys.exit(0)
