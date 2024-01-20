@@ -32,15 +32,14 @@ test_serial_port_obj = vserial.OpenPort(test_serial_port, test_serial_port_baud,
 standard_serial_port_obj = vserial.OpenPort(standard_serial_port, standard_serial_port_baud, 4)
 
 test_serial_queue = queue.Queue()
-test_serial_thread = threading.Thread(target=vserial.ReadFromPort, args=([test_serial_port_obj, test_serial_queue]))
+test_serial_thread = threading.Thread(target=vserial.ParseKISSFromPort, args=([test_serial_port_obj, test_serial_queue]))
 test_serial_thread.start()
 
 standard_serial_queue = queue.Queue()
-standard_serial_thread = threading.Thread(target=vserial.ReadFromPort, args=([standard_serial_port_obj, standard_serial_queue]))
+standard_serial_thread = threading.Thread(target=vserial.ParseKISSFromPort, args=([standard_serial_port_obj, standard_serial_queue]))
 standard_serial_thread.start()
 
 vgpio.SetupGPIO()
-
 vgpio.SetTestDeviceMode(4)
 vgpio.SetStandardDeviceMode(4)
 time.sleep(2)
@@ -81,7 +80,6 @@ test_serial_port_obj.close()
 standard_serial_port_obj.close()
 test_serial_thread.join()
 standard_serial_thread.join()
-
 
 print(f"Standard device heard {count} frames.")
 

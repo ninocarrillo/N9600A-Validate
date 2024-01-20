@@ -6,7 +6,7 @@
 
 import serial
 
-def ReadFromPort(serial_port, queue):
+def ParseKISSFromPort(serial_port, queue):
 	kiss_state = "non-escaped"
 	kiss_frame = []
 	frame_count = 0
