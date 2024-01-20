@@ -132,9 +132,6 @@ def GetFrameMeta(packet):
 			this['PIDString'] = buffer
 
 		index = index + 1
-
-		# return the index of the start of payload data
-		print(" ")
 	return this
 
 

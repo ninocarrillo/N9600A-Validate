@@ -61,7 +61,7 @@ Generate a UI frame to assign callsign to TEST device.
 """
 print(f"{time.asctime()} Sending a UI Packet from {test_callsign} to {standard_callsign} to set TEST device callsign.")
 packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, 50)
-print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}")
+print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
 test_serial_port_obj.write(vpacket.EncodeKISSFrame(packet))
 time.sleep(1)
 count = 0
