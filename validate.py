@@ -17,12 +17,16 @@ import validate_threading_functions as vthread
 import validate_serial_functions as vserial
 
 test_serial_port = "/dev/ttyACM0"
+test_serial_port_baud = "57600"
+standard_serial_port = "/dev/ttyACM1"
+standard_serial_port_baud = "57600"
 
 if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
 	sys.exit(1)
 
-vserial.OpenPort(test_serial_port, "57600", 3)
+test_serial_port_obbj = vserial.OpenPort(test_serial_port, test_serial_port_baud, 3)
+standard_serial_port_obj = vserial.OpenPort(standard_serial_port, standard_serial_port_baud, 4)
 
 vgpio.SetupGPIO()
 
@@ -49,5 +53,8 @@ for mode in range(3):
 	time.sleep(5)
 
 vgpio.Cleanup()
+
+test_serial_port_obj.close()
+standard_serial_port_obj.close()
 
 sys.exit(0)
