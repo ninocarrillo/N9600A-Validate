@@ -4,6 +4,8 @@
 # Nino Carrillo
 # 20 Jan 2024
 
+import random
+
 def StringCallsignToArray(input_string):
 	output = [0x20, 0x20, 0x20, 0x20, 0x20, 0x20, 0]
 	callsign_length = 0
