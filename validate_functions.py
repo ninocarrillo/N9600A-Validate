@@ -4,6 +4,9 @@
 # Nino Carrillo
 # 20 Jan 2024
 
+
+import RPi.GPIO as gpio
+
 def SetupGPIO():
 	# Test Device MODE3 Switch
 	gpio.setup(17,gpio.OUT)
