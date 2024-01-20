@@ -80,7 +80,7 @@ def GenerateUIPacket(source_callsign_string, dest_callsign_string, length):
 		rand = random.randint(32,126)
 		kiss_frame.extend(bytearray(rand.to_bytes(1,'big')))
 
-	print(f'\nFrame CRC value: {crc.CalcCRC16(kiss_frame)}')
+	print(f'Frame CRC value: {crc.CalcCRC16(kiss_frame)}')
 
 	frame_index = 0
 	kiss_output_frame = bytearray()

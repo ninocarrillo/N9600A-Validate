@@ -63,10 +63,13 @@ test_serial_port_obj.write(vpacket.GenerateUIPacket(test_callsign, standard_call
 time.sleep(1)
 print(f"{time.asctime()} Done.")
 count = 0
+start_time = time.time()
 while not standard_serial_queue.empty():
 	standard_serial_queue.get()
 	count += 1
 	print(test_serial_queue.get())
+	if time.time() - start_time > 2:
+		break
 print(f"STANDARD device heard {count} frames.")
 
 vgpio.SetTestDeviceMode(4)
