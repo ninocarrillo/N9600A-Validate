@@ -177,9 +177,7 @@ def StringCallsignToArray(input_string):
 	output[6] = ssid
 	return output
 
-def GenerateUIPacket(source_callsign_string, dest_callsign_string, length):
-	source_callsign = StringCallsignToArray(source_callsign_string)
-	dest_callsign = StringCallsignToArray(dest_callsign_string)
+def EncodeKISSFrame(kiss_frame):
 	FESC = int(0xDB).to_bytes(1,'big')
 	FEND = int(0xC0).to_bytes(1,'big')
 	TFESC = int(0xDD).to_bytes(1,'big')
@@ -188,6 +186,25 @@ def GenerateUIPacket(source_callsign_string, dest_callsign_string, length):
 	KISS_COMMAND = 0
 	KISS_TYPE_ID = (KISS_PORT * 16) + KISS_COMMAND
 	KISS_TYPE_ID = KISS_TYPE_ID.to_bytes(1,'big')
+	frame_index = 0
+	kiss_output_frame = bytearray()
+	while(frame_index < len(kiss_frame)):
+		kiss_byte = kiss_frame[frame_index]
+		if kiss_byte.to_bytes(1,'big') == FESC:
+			kiss_output_frame.extend(FESC)
+			kiss_output_frame.extend(TFESC)
+		elif kiss_byte.to_bytes(1, 'big') == FEND:
+			kiss_output_frame.extend(FESC)
+			kiss_output_frame.extend(TFEND)
+		else:
+			kiss_output_frame.extend(kiss_byte.to_bytes(1, 'big'))
+		frame_index += 1
+	kiss_output_frame = bytearray(FEND) + bytearray(KISS_TYPE_ID) + kiss_output_frame + bytearray(FEND)
+	return kiss_output_frame
+
+def GenerateUIPacket(source_callsign_string, dest_callsign_string, length):
+	source_callsign = StringCallsignToArray(source_callsign_string)
+	dest_callsign = StringCallsignToArray(dest_callsign_string)
 
 	# Assemble KISS frame:
 	kiss_frame = bytearray()
@@ -211,20 +228,4 @@ def GenerateUIPacket(source_callsign_string, dest_callsign_string, length):
 		rand = random.randint(32,126)
 		kiss_frame.extend(bytearray(rand.to_bytes(1,'big')))
 
-	print(f'Frame CRC value: {crc.CalcCRC16(kiss_frame)}')
-
-	frame_index = 0
-	kiss_output_frame = bytearray()
-	while(frame_index < len(kiss_frame)):
-		kiss_byte = kiss_frame[frame_index]
-		if kiss_byte.to_bytes(1,'big') == FESC:
-			kiss_output_frame.extend(FESC)
-			kiss_output_frame.extend(TFESC)
-		elif kiss_byte.to_bytes(1, 'big') == FEND:
-			kiss_output_frame.extend(FESC)
-			kiss_output_frame.extend(TFEND)
-		else:
-			kiss_output_frame.extend(kiss_byte.to_bytes(1, 'big'))
-		frame_index += 1
-	kiss_output_frame = bytearray(FEND) + bytearray(KISS_TYPE_ID) + kiss_output_frame + bytearray(FEND)
-	return kiss_output_frame
+	return kiss_frame
