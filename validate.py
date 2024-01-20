@@ -63,7 +63,7 @@ print(f"{time.asctime()} Sending a UI Packet from {test_callsign} to {standard_c
 packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, 50)
 metadata = vpacket.GetFrameMeta(packet)
 print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
-print(f'{time.asctime()} Packet payload: {metadata['Payload']}')
+print(f"{time.asctime()} Packet payload: {metadata['Payload']}")
 test_serial_port_obj.write(vpacket.EncodeKISSFrame(packet))
 time.sleep(1)
 count = 0
@@ -73,7 +73,7 @@ while not standard_serial_queue.empty():
 	count += 1
 	metadata = vpacket.GetFrameMeta(packet)
 	print(f'{time.asctime()} STANDARD device heard packet from {metadata["SOURCE"]} to {metadata["DEST"]} CRC {metadata["CRC"]}.')
-	print(f'{time.asctime()} Packet payload: {metadata['Payload']}')
+	print(f"{time.asctime()} Packet payload: {metadata['Payload']}")
 	if time.time() - start_time > 2:
 		break
 print(f"{time.asctime()} Done.")
