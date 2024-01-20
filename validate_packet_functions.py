@@ -7,13 +7,13 @@
 import random
 import crc
 
-def GetCRCFromKISS(frame):
-	return crc.CalcCRC16(frame[1:])
+def GetCRC(packet):
+	return crc.CalcCRC16(packet)
 
-def GetKISSFrameMeta(frame):
+def GetFrameMeta(packet):
 	this = {}
-	this['CRC'] = crc.CalcCRC16(frame[1:])
-	count = len(frame)
+	this['CRC'] = crc.CalcCRC16(packet)
+	count = len(packet)
 	index = 0
 	if (count > 14):
 		valid_header = 1
@@ -22,7 +22,7 @@ def GetKISSFrameMeta(frame):
 		subfield_character_index = 0
 		subfield_index = 0
 		while address_extension_bit == 0:
-			working_character = int(frame[index])
+			working_character = int(packet[index])
 			if (working_character & 0b1) == 1:
 				address_extension_bit = 1
 			working_character = working_character >> 1
@@ -56,25 +56,25 @@ def GetKISSFrameMeta(frame):
 			if index > count:
 				address_extension_bit = 1
 		# Control and PID fields
-		working_character = frame[index]
+		working_character = packet[index]
 		this['Control'] = working_character
 		poll_final_bit = (working_character & 0x10) >> 4
-		# determine what type of frame this is
+		# determine what type of packet this is
 		if (working_character & 1) == 1:
-			# either a Supervisory or Unnumbered frame
+			# either a Supervisory or Unnumbered packet
 			frame_type = working_character & 3
 		else:
-			# Information frame
+			# Information packet
 			frame_type = 0
 			ax25_ns = (working_character >> 1) & 7
 			ax25_nr = (working_character >> 5) & 7
 
 		if frame_type == 1:
-			# Supervisory frame
+			# Supervisory packet
 			ax25_nr = (working_character >> 5) & 7
 
 		if frame_type == 3:
-			# Unnumbered frame, determine what type
+			# Unnumbered packet, determine what type
 			ax25_u_control_field_type = working_character & 0xEF
 		else:
 			ax25_u_control_field_type = 0
@@ -100,10 +100,10 @@ def GetKISSFrameMeta(frame):
 		this['ControlString'] = buffer
 
 		if (frame_type == 0) or (ax25_u_control_field_type == 3):
-			# This is an Information frame, or an Unnumbered Information frame, so
+			# This is an Information packet, or an Unnumbered Information packet, so
 			# there is a PID byte.
 			index = index + 1
-			working_character = frame[index]
+			working_character = packet[index]
 			this['PID'] = working_character
 			if (working_character == 1):
 				buffer = "ISO 8208"
@@ -177,7 +177,7 @@ def StringCallsignToArray(input_string):
 	output[6] = ssid
 	return output
 
-def EncodeKISSFrame(kiss_frame):
+def EncodeKISSFrame(packet):
 	FESC = int(0xDB).to_bytes(1,'big')
 	FEND = int(0xC0).to_bytes(1,'big')
 	TFESC = int(0xDD).to_bytes(1,'big')
@@ -188,8 +188,8 @@ def EncodeKISSFrame(kiss_frame):
 	KISS_TYPE_ID = KISS_TYPE_ID.to_bytes(1,'big')
 	frame_index = 0
 	kiss_output_frame = bytearray()
-	while(frame_index < len(kiss_frame)):
-		kiss_byte = kiss_frame[frame_index]
+	while(frame_index < len(packet)):
+		kiss_byte = packet[frame_index]
 		if kiss_byte.to_bytes(1,'big') == FESC:
 			kiss_output_frame.extend(FESC)
 			kiss_output_frame.extend(TFESC)
@@ -206,26 +206,26 @@ def GenerateUIPacket(source_callsign_string, dest_callsign_string, length):
 	source_callsign = StringCallsignToArray(source_callsign_string)
 	dest_callsign = StringCallsignToArray(dest_callsign_string)
 
-	# Assemble KISS frame:
-	kiss_frame = bytearray()
+	# Assemble packet:
+	packet = bytearray()
 	# Add destination callsign, shifted left one bit:
 	for j in range(6):
-		kiss_frame.extend((dest_callsign[j]<<1).to_bytes(1,'big'))
+		packet.extend((dest_callsign[j]<<1).to_bytes(1,'big'))
 	# Add destination SSID with CRR bits set
-	kiss_frame.extend((((dest_callsign[6] & 0xF)<<1) | 0xE0).to_bytes(1,'big'))
+	packet.extend((((dest_callsign[6] & 0xF)<<1) | 0xE0).to_bytes(1,'big'))
 	# Add source callsign, shifted left one bit:
 	for k in range(6):
-		kiss_frame.extend((source_callsign[k]<<1).to_bytes(1,'big'))
+		packet.extend((source_callsign[k]<<1).to_bytes(1,'big'))
 	# Add source SSID with Address Extension Bit and RR bits:
-	kiss_frame.extend((((source_callsign[6] & 0xF) << 1) | 0x61).to_bytes(1,'big'))
+	packet.extend((((source_callsign[6] & 0xF) << 1) | 0x61).to_bytes(1,'big'))
 
 	# Add Control field for UI:
-	kiss_frame.extend((0x03).to_bytes(1,'big'))
+	packet.extend((0x03).to_bytes(1,'big'))
 	# Add PID for No Layer 3:
-	kiss_frame.extend((0xF0).to_bytes(1,'big'))
+	packet.extend((0xF0).to_bytes(1,'big'))
 
 	for j in range(0, length):
 		rand = random.randint(32,126)
-		kiss_frame.extend(bytearray(rand.to_bytes(1,'big')))
+		packet.extend(bytearray(rand.to_bytes(1,'big')))
 
-	return kiss_frame
+	return packet

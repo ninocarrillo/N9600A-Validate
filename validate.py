@@ -60,14 +60,16 @@ print(f"{time.asctime()} Done.")
 Generate a UI frame to assign callsign to TEST device.
 """
 print(f"{time.asctime()} Sending a UI Packet from {test_callsign} to {standard_callsign} to set TEST device callsign.")
-test_serial_port_obj.write(vpacket.EncodeKISSFrame(vpacket.GenerateUIPacket(test_callsign, standard_callsign, 50)))
+packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, 50)
+print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)})
+test_serial_port_obj.write(vpacket.EncodeKISSFrame(packet))
 time.sleep(1)
 count = 0
 start_time = time.time()
 while not standard_serial_queue.empty():
-	frame = standard_serial_queue.get()
+	packet = standard_serial_queue.get()
 	count += 1
-	metadata = vpacket.GetKISSFrameMeta(frame)
+	metadata = vpacket.GetFrameMeta(packet)
 	print(f'STANDARD device heard CRC value: {metadata["CRC"]}, Source Callsign {metadata["SOURCE"]}, Dest Callsign {metadata["DEST"]}.')
 	if time.time() - start_time > 2:
 		break
