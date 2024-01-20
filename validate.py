@@ -70,7 +70,7 @@ while not standard_serial_queue.empty():
 	packet = standard_serial_queue.get()
 	count += 1
 	metadata = vpacket.GetFrameMeta(packet)
-	print(f'{time.asctime()} STANDARD device heard CRC value: {metadata["CRC"]}, Source Callsign {metadata["SOURCE"]}, Dest Callsign {metadata["DEST"]}.')
+	print(f'{time.asctime()} STANDARD device heard packet from {metadata["SOURCE"]} to {metadata["DEST"]} CRC {metadata["CRC"]}.')
 	if time.time() - start_time > 2:
 		break
 print(f"{time.asctime()} Done.")
