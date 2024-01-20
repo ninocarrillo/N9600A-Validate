@@ -1,4 +1,4 @@
-# n9600a-validate
+# validate.py
 # Python3
 # Validate N9600A firmware
 # Nino Carrillo
@@ -14,7 +14,7 @@ import sys
 import time
 import RPi.GPIO as gpio
 import subprocess
-import validate-functions as val
+import validate_functions as val
 
 
 

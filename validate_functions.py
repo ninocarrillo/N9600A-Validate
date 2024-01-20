@@ -1,6 +1,6 @@
-# validate-functions.py
+# validate_functions.py
 # Python3
-# Support n9600a-validate.py
+# Support validate.py
 # Nino Carrillo
 # 20 Jan 2024
 
