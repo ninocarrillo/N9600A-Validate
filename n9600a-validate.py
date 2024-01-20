@@ -109,7 +109,9 @@ time.sleep(1)
 
 for mode in range(16):
 	SetTestDeviceMode(mode)
+	print("Test Mode: ", mode)
 	SetStandardDeviceMode(mode)
+	print("Standard Mode: ", mode)
 	time.sleep(2)
 
 	AssertTestTXButton()
