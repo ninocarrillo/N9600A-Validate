@@ -85,7 +85,7 @@ print(f"{time.asctime()} Pressing TEST_TX button.")
 vgpio.AssertTestTXButton()
 time.sleep(.1)
 vgpio.ReleaseTestTXButton()
-time.sleep(1)
+time.sleep(2)
 count = 0
 start_time = time.time()
 while not standard_serial_queue.empty():
