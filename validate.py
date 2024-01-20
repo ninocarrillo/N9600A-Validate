@@ -11,7 +11,6 @@
 
 import sys
 import time
-import datetime
 import subprocess
 import threading
 import queue
@@ -32,15 +31,12 @@ if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
 	sys.exit(1)
 
-
 """
 Initialize Raspberry Pi GPIO for manipulation of MODE switches on TEST device
 and STANDARD device.
 """
 print(f"{time.asctime()} Initializing Raspberry Pi GPIO.")
 vgpio.SetupGPIO()
-vgpio.SetTestDeviceMode(4)
-vgpio.SetStandardDeviceMode(4)
 time.sleep(2)
 print(f"{time.asctime()} Done.")
 
@@ -48,21 +44,23 @@ print(f"{time.asctime()} Done.")
 Open serial port for TEST device and STANDARD device.
 Use threading to read serial data and parse KISS frames outside main thread.
 """
+print(f"{time.asctime()} Opening TEST and STANDARD device serial ports, starting KISS reader threads.")
 test_serial_port_obj = vserial.OpenPort(test_serial_port, test_serial_port_baud, 3)
 standard_serial_port_obj = vserial.OpenPort(standard_serial_port, standard_serial_port_baud, 4)
-
 test_serial_queue = queue.Queue()
 test_serial_thread = threading.Thread(target=vserial.ParseKISSFromPort, args=([test_serial_port_obj, test_serial_queue]))
 test_serial_thread.start()
-
 standard_serial_queue = queue.Queue()
 standard_serial_thread = threading.Thread(target=vserial.ParseKISSFromPort, args=([standard_serial_port_obj, standard_serial_queue]))
 standard_serial_thread.start()
+print(f"{time.asctime()} Done.")
 
 """
 Generate a UI frame to assign callsign to TEST device.
 """
 
+vgpio.SetTestDeviceMode(4)
+vgpio.SetStandardDeviceMode(4)
 subprocess.run(["aplay", path_to_test_audio + "2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
 
 #vthread.popen_and_call(vthread.end_do_nothing, ["aplay", "/home/pi/github/modem-test-audio/2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
