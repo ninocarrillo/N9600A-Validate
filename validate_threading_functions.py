@@ -10,7 +10,7 @@ import subprocess
 
 
 # from https://stackoverflow.com/questions/2581817/python-subprocess-callback-when-cmd-exits
-def popen_and_call(on_exit, popen_args):
+def popen_and_call(on_exit, *popen_args):
 	"""
 	Runs the given args in a subprocess.Popen, and then calls the function
 	on_exit when the subprocess completes.
