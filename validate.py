@@ -70,10 +70,9 @@ while not standard_serial_queue.empty():
 	packet = standard_serial_queue.get()
 	count += 1
 	metadata = vpacket.GetFrameMeta(packet)
-	print(f'STANDARD device heard CRC value: {metadata["CRC"]}, Source Callsign {metadata["SOURCE"]}, Dest Callsign {metadata["DEST"]}.')
+	print(f'{time.asctime()} STANDARD device heard CRC value: {metadata["CRC"]}, Source Callsign {metadata["SOURCE"]}, Dest Callsign {metadata["DEST"]}.')
 	if time.time() - start_time > 2:
 		break
-print(f"STANDARD device heard {count} frames.")
 print(f"{time.asctime()} Done.")
 
 vgpio.SetTestDeviceMode(4)
