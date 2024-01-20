@@ -58,6 +58,16 @@ print(f"{time.asctime()} Done.")
 """
 Generate a UI frame to assign callsign to TEST device.
 """
+print(f"{time.asctime()} Sending a UI Packet from {test_callsign} to {standard_callsign} to set TEST device callsign.")
+test_serial_port_obj.write(vpacket.GenerateUIPacket(test_callsign, standard_callsign, 50))
+time.sleep(1)
+print(f"{time.asctime()} Done.")
+count = 0
+while not standard_serial_queue.empty():
+	standard_serial_queue.get()
+	count += 1
+	print(test_serial_queue.get())
+print(f"STANDARD device heard {count} frames.")
 
 vgpio.SetTestDeviceMode(4)
 vgpio.SetStandardDeviceMode(4)
