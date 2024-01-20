@@ -22,6 +22,7 @@ test_serial_port = "/dev/ttyACM0"
 test_serial_port_baud = "57600"
 standard_serial_port = "/dev/ttyACM1"
 standard_serial_port_baud = "57600"
+path_to_test_audio = "/home/pi/github/modem-test-audio/"
 
 if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
@@ -40,7 +41,7 @@ vgpio.SetTestDeviceMode(4)
 vgpio.SetStandardDeviceMode(4)
 time.sleep(2)
 
-subprocess.run(["aplay", "/home/pi/github/modem-test-audio/2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
+subprocess.run(["aplay", path_to_test_audio + "2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
 
 #vthread.popen_and_call(vthread.end_do_nothing, ["aplay", "/home/pi/github/modem-test-audio/2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
 
