@@ -9,17 +9,20 @@
 # 3 Unable to open test serial port
 # 4 Unable to open standard serial port
 
-import serial
 import sys
 import time
 import subprocess
 import validate_gpio_functions as vgpio
 import validate_threading_functions as vthread
+import validate_serial_functions as vserial
+
+test_serial_port = "/dev/ttyACM0"
 
 if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
 	sys.exit(1)
 
+vserial.OpenPort(test_serial_port, "57600", 3)
 
 vgpio.SetupGPIO()
 

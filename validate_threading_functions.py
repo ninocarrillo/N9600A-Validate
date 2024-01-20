@@ -1,4 +1,4 @@
-# validate_threqading_functions.py
+# validate_threading_functions.py
 # Python3
 # Support validate.py
 # Nino Carrillo
