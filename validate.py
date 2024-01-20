@@ -14,7 +14,7 @@ import sys
 import time
 import subprocess
 import validate_gpio_functions as vgpio
-impoprt validate_threading_functions as vthread
+import validate_threading_functions as vthread
 
 if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
