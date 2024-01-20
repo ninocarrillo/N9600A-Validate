@@ -35,6 +35,10 @@ test_serial_queue = queue.Queue()
 test_serial_thread = threading.Thread(target=vserial.ReadFromPort, args=([test_serial_port_obj, test_serial_queue]))
 test_serial_thread.start()
 
+standard_serial_queue = queue.Queue()
+standard_serial_thread = threading.Thread(target=vserial.ReadFromPort, args=([standard_serial_port_obj, standard_serial_queue]))
+standard_serial_thread.start()
+
 vgpio.SetupGPIO()
 
 vgpio.SetTestDeviceMode(4)
@@ -52,7 +56,7 @@ while not test_serial_queue.empty():
 	test_serial_queue.get()
 	count += 1
 	#print(test_serial_queue.get())
-print(f"Heard {count} frames.")
+print(f"Test device heard {count} frames.")
 
 for mode in range(3):
 	vgpio.SetTestDeviceMode(mode)
@@ -67,10 +71,19 @@ for mode in range(3):
 	time.sleep(5)
 
 
+count = 0
+while not standard_serial_queue.empty():
+	standard_serial_queue.get()
+	count += 1
+
 
 test_serial_port_obj.close()
 standard_serial_port_obj.close()
 test_serial_thread.join()
+standard_serial_thread.join()
+
+
+print(f"Standard device heard {count} frames.")
 
 vgpio.Cleanup()
 
