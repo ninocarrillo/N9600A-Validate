@@ -65,7 +65,7 @@ print(f"{time.asctime()} Done.")
 count = 0
 start_time = time.time()
 while not standard_serial_queue.empty():
-	standard_serial_queue.get()
+	#standard_serial_queue.get()
 	count += 1
 	print(standard_serial_queue.get())
 	if time.time() - start_time > 2:
