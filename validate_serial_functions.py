@@ -6,16 +6,34 @@
 
 import serial
 
-def HandleSerialData(data, queue):
-	#print(data)
-	queue.put(data)
-
 def ReadFromPort(serial_port, queue):
+	kiss_state = "non-escaped"
+	kiss_frame = []
+	frame_count = 0
 	while serial_port.isOpen():
 		try:
 			input_data = serial_port.read(1)
 			if input_data:
-				HandleSerialData(input_data, queue)
+				if kiss_state == "non-escaped":
+					if ord(input_data) == 0xDB: # FESC
+						kiss_state = "escaped"
+					elif ord(input_data) == 0xC0: # FEND
+						if len(kiss_frame) > 0:
+							frame_count += 1
+							queue.put(kiss_frame, frame_count)
+							kiss_frame = []
+						else:
+							kiss_frame = []
+					else:
+						kiss_frame.append(ord(input_data))
+				elif kiss_state == "escaped":
+					if ord(input_data) == 0xDD: # TFESC
+						kiss_frame.append(0xDB) # FESC
+						kiss_state = "non-escaped"
+					elif ord(input_data) == 0xDC: # TFEND
+						kiss_frame.append(0xC0) # FEND
+						kiss_state = "non-escaped"
+
 		except:
 			break
 
