@@ -12,4 +12,4 @@ def OpenPort(port_name, port_baud, exit_error):
 	except:
 		print(f"Unable to open serial port {port_name}")
 		sys.exit(exit_error)
-	return port_obejct
+	return port_object
