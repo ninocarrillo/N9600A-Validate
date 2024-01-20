@@ -132,6 +132,7 @@ def GetFrameMeta(packet):
 			this['PIDString'] = buffer
 
 		index = index + 1
+		this['Payload'] = packet[index:]
 	return this
 
 
