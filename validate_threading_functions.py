@@ -18,7 +18,7 @@ def popen_and_call(on_exit, popen_args):
 	would give to subprocess.Popen.
 	"""
 	def run_in_thread(on_exit, popen_args):
-		proc = subprocess.Popoen(*popen_args)
+		proc = subprocess.Popen(*popen_args)
 		proc.wait()
 		on_exit()
 		return
