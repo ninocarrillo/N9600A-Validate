@@ -60,7 +60,7 @@ print(f"{time.asctime()} Done.")
 Generate a UI frame to assign callsign to TEST device.
 """
 print(f"{time.asctime()} Sending a UI Packet from {test_callsign} to {standard_callsign} to set TEST device callsign.")
-test_serial_port_obj.write(vpacket.EncodeKISSFrame(vpacket.GenerateUIPacket(test_callsign, standard_callsign, 50))
+test_serial_port_obj.write(vpacket.EncodeKISSFrame(vpacket.GenerateUIPacket(test_callsign, standard_callsign, 50)))
 time.sleep(1)
 count = 0
 start_time = time.time()
