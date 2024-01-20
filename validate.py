@@ -18,6 +18,7 @@ import validate_gpio_functions as vgpio
 import validate_threading_functions as vthread
 import validate_serial_functions as vserial
 import validate_packet_functions as vpacket
+import crc
 
 test_serial_port = "/dev/ttyACM0"
 test_serial_port_baud = "57600"
