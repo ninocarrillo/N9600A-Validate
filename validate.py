@@ -46,9 +46,12 @@ subprocess.run(["aplay", "/home/pi/github/modem-test-audio/2_burst/GFSK_4800_IL2
 
 time.sleep(2)
 
+count = 0
 while not test_serial_queue.empty():
-	print(test_serial_queue.get())
-
+	test_serial_queue.get()
+	count += 1
+	#print(test_serial_queue.get())
+print(f"Heard {count} frames.")
 
 for mode in range(3):
 	vgpio.SetTestDeviceMode(mode)
