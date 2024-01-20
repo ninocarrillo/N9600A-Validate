@@ -10,8 +10,8 @@ def HandleSerialData(data):
 	print(data)
 	
 def ReadFromPort(serial_port):
-	while port.isOpen():
-		input_data = port.read(1)
+	while serial_port.isOpen():
+		input_data = serial_port.read(1)
 		if input_data:
 			HandleSerialData(input_data)
 
