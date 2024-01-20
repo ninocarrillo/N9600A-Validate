@@ -21,8 +21,6 @@ def GetKISSFrameMeta(frame):
 		index = 1
 		subfield_character_index = 0
 		subfield_index = 0
-		# print("- AX.25 Decode:")
-		# Print address information
 		while address_extension_bit == 0:
 			working_character = int(frame[index])
 			if (working_character & 0b1) == 1:
@@ -33,9 +31,9 @@ def GetKISSFrameMeta(frame):
 				buffer = ""
 				if (subfield_index == 0):
 					#print("To:", end='')
-					tag = "SOURCE"
-				elif (subfield_index == 1):
 					tag = "DEST"
+				elif (subfield_index == 1):
+					tag = "SOURCE"
 				else:
 					tag = "VIA" + str(subfield_index - 1)
 			if subfield_character_index < 7:
@@ -46,7 +44,7 @@ def GetKISSFrameMeta(frame):
 				# This is the SSID characters
 				# Get bits
 				buffer += '-'
-				buffer += chr(working_character & 0b1111)
+				buffer += chr((working_character & 0b1111) + 0x20)
 				if (working_character & 0b10000000):
 					# C or H bit is set
 					buffer += '*'
