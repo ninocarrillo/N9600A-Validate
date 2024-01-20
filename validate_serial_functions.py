@@ -6,15 +6,16 @@
 
 import serial
 
-def HandleSerialData(data):
-	print(data)
-	
-def ReadFromPort(serial_port):
+def HandleSerialData(data, queue):
+	#print(data)
+	queue.put(data)
+
+def ReadFromPort(serial_port, queue):
 	while serial_port.isOpen():
 		try:
 			input_data = serial_port.read(1)
 			if input_data:
-				HandleSerialData(input_data)
+				HandleSerialData(input_data, queue)
 		except:
 			break
 

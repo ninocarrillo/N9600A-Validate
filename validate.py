@@ -13,6 +13,7 @@ import sys
 import time
 import subprocess
 import threading
+import queue
 import validate_gpio_functions as vgpio
 import validate_threading_functions as vthread
 import validate_serial_functions as vserial
@@ -29,7 +30,8 @@ if sys.version_info < (3, 0):
 test_serial_port_obj = vserial.OpenPort(test_serial_port, test_serial_port_baud, 3)
 standard_serial_port_obj = vserial.OpenPort(standard_serial_port, standard_serial_port_baud, 4)
 
-test_serial_thread = threading.Thread(target=vserial.ReadFromPort, args=([test_serial_port_obj]))
+test_serial_queue = queue.Queue()
+test_serial_thread = threading.Thread(target=vserial.ReadFromPort, args=([test_serial_port_obj, test_serial_queue]))
 test_serial_thread.start()
 
 vgpio.SetupGPIO()
@@ -43,6 +45,10 @@ time.sleep(2)
 vthread.popen_and_call(vthread.end_do_nothing, ["aplay", "/home/pi/github/modem-test-audio/1_single/GFSK_4800_IL2Pc_50b_1x.wav"])
 
 time.sleep(5)
+
+while not test_serial_queue.empty():
+	print(test_serial_queue.get())
+
 
 for mode in range(3):
 	vgpio.SetTestDeviceMode(mode)
