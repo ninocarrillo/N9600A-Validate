@@ -57,11 +57,10 @@ while not test_serial_queue.empty():
 	#print(test_serial_queue.get())
 print(f"Test device heard {count} frames.")
 
-for mode in range(3):
+for mode in range(16):
 	vgpio.SetTestDeviceMode(mode)
-	print("Test Mode: ", mode)
 	vgpio.SetStandardDeviceMode(mode)
-	print("Standard Mode: ", mode)
+	print(f"Generating test packet in MODE {bin(mode)}")
 	time.sleep(2)
 
 	vgpio.AssertTestTXButton()
