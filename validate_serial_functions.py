@@ -11,9 +11,12 @@ def HandleSerialData(data):
 	
 def ReadFromPort(serial_port):
 	while serial_port.isOpen():
-		input_data = serial_port.read(1)
-		if input_data:
-			HandleSerialData(input_data)
+		try:
+			input_data = serial_port.read(1)
+			if input_data:
+				HandleSerialData(input_data)
+		except:
+			break
 
 def OpenPort(port_name, port_baud, exit_error):
 	try:
