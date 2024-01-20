@@ -57,8 +57,7 @@ def GetKISSFrameMeta(frame):
 				address_extension_bit = 1
 		# Control and PID fields
 		working_character = frame[index]
-		print(", Control: ", end='')
-		print(f'{hex(working_character)} ', end='')
+		this['Control'] = working_character
 		poll_final_bit = (working_character & 0x10) >> 4
 		# determine what type of frame this is
 		if (working_character & 1) == 1:
@@ -81,55 +80,56 @@ def GetKISSFrameMeta(frame):
 			ax25_u_control_field_type = 0
 
 		if (ax25_u_control_field_type == 0x6F):
-			print("SABME", end='')
+			buffer = "SABME"
 		elif (ax25_u_control_field_type == 0x2F):
-			print("SABM", end='')
+			buffer = "SABM"
 		elif (ax25_u_control_field_type == 0x43):
-			print("DISC", end='')
+			buffer = "DISC"
 		elif (ax25_u_control_field_type == 0x0F):
-			print("DM", end='')
+			buffer = "DM"
 		elif (ax25_u_control_field_type == 0x63):
-			print("UA", end='')
+			buffer = "UA"
 		elif (ax25_u_control_field_type == 0x87):
-			print("FRMR", end='')
+			buffer = "FRMR"
 		elif (ax25_u_control_field_type == 0x03):
-			print("UI", end='')
+			buffer = "UI"
 		elif (ax25_u_control_field_type == 0xAF):
-			print("XID", end='')
+			buffer = "XID"
 		elif (ax25_u_control_field_type == 0xE3):
-			print("TEST", end='')
+			buffer = "TEST"
+		this['ControlString'] = buffer
 
 		if (frame_type == 0) or (ax25_u_control_field_type == 3):
 			# This is an Information frame, or an Unnumbered Information frame, so
 			# there is a PID byte.
 			index = index + 1
 			working_character = frame[index]
-			print(", PID: ", end='')
-			print(f'{hex(working_character)} ', end='')
+			this['PID'] = working_character
 			if (working_character == 1):
-				print("ISO 8208", end='')
+				buffer = "ISO 8208"
 			if (working_character == 6):
-				print("Compressed TCP/IP", end='')
+				buffer = "Compressed TCP/IP"
 			if (working_character == 7):
-				print("Uncompressed TCP/IP", end='')
+				buffer = "Uncompressed TCP/IP"
 			if (working_character == 8):
-				print("Segmentation Fragment", end='')
+				buffer = "Segmentation Fragment"
 			if (working_character == 0xC3):
-				print("TEXNET", end='')
+				buffer = "TEXNET"
 			if (working_character == 0xC4):
-				print("Link Quality Protocol", end='')
+				buffer = "Link Quality Protocol"
 			if (working_character == 0xCA):
-				print("Appletalk", end='')
+				buffer = "Appletalk"
 			if (working_character == 0xCC):
-				print("ARPA Internet Protocol", end='')
+				buffer = "ARPA Internet Protocol"
 			if (working_character == 0xCD):
-				print("ARPA Address Resolution", end='')
+				pbuffer = "ARPA Address Resolution"
 			if (working_character == 0xCF):
-				print("TheNET (NET/ROM)", end='')
+				buffer = "TheNET (NET/ROM)"
 			if (working_character == 0xF0):
-				print("No Layer 3", end='')
+				buffer = "No Layer 3"
 			if (working_character == 0xFF):
-				print("Escape", end='')
+				buffer = "Escape"
+			this['PIDString'] = buffer
 
 		index = index + 1
 
