@@ -67,7 +67,7 @@ start_time = time.time()
 while not standard_serial_queue.empty():
 	standard_serial_queue.get()
 	count += 1
-	print(test_serial_queue.get())
+	print(standard_serial_queue.get())
 	if time.time() - start_time > 2:
 		break
 print(f"STANDARD device heard {count} frames.")
