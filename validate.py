@@ -100,22 +100,22 @@ burst_track_list = ["2_burst/GFSK_9600_AX25_50b_10x.wav",
 			"2_burst/AFSK_300_IL2Pc_50b_10x.wav",
 			"2_burst/BPSK_1200_IL2P_50b_10x.wav" ]
 
-beacon_mode_list = [ 6,
-					6,
-					6,
-					6,
-					6,
-					6,
-					-1,
-					12,
-					12,
-					12,
-					12,
-					-1,
-					12,
-					12,
-					6,
-					6 ]
+beacon_mode_list = [ 6, # 0000 GFSK 9600 AX.25
+					6, #  0001 GFSK 9600 IL2P
+					6, #  0010 GFSK 9600 IL2Pc
+					6, #  0011 GFSK 4800 IL2P
+					6, #  0100 GFSK 4800 IL2Pc
+					6, #  0101 DAPSK 2400 IL2P
+					-1, # 0110 AFSK 1200 AX.25
+					6, #  0111 AFSK 1200 IL2P
+					12, # 1000 BPSK 300 IL2Pc
+					12, # 1001 QPSK 600 IL2Pc
+					12, # 1010 BPSK 1200 IL2Pc
+					12, # 1011 QPSK 2400 IL2Pc
+					-1, # 1100 AFSK 300 AX.25 
+					-1, # 1101 AFSK 300 IL2P
+					-1, # 1110 AFSK 300 IL2Pc
+					6 ] # 1111 BPSK 1200 IL2P
 
 if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
@@ -165,7 +165,39 @@ while not standard_serial_queue.empty():
 	print(f'{time.asctime()} STANDARD device heard packet from {tx_metadata["SOURCE"]} to {tx_metadata["DEST"]} CRC {tx_metadata["CRC"]}.')
 	print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
 
-
+"""
+Check BEACON PACKET function.
+"""
+print(f"{time.asctime()} Testing BEACON FUNCTION in all applicable modes.")
+vthread.ClearQueue(standard_serial_queue)
+vthread.ClearQueue(test_serial_queue)
+for mode in range(16):
+	if beacon_mode_list[mode] > 0:
+		print(f"{time.asctime()} Mode {mode_list[mode]}.")
+		vgpio.SetTestDeviceMode(mode)
+		vgpio.SetStandardDeviceMode(beacon_mode_list[mode])
+		time.sleep(reset_time)
+		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0x09, [0xF0, 0x01])) # Set beacon interval to 1 minute
+		packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 0)
+		#tx_metadata = vpacket.GetFrameMeta(packet)
+		#print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
+		#print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
+		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,packet))
+		time.sleep(60)
+		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,packet))
+		time.sleep(60)
+		count = 0
+		while not standard_serial_queue.empty():
+			packet = standard_serial_queue.get()
+			rx_metadata = vpacket.GetFrameMeta(packet)
+			print(f'{time.asctime()} STANDARD device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
+			print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
+			count += 1
+		print(f"Standard device heard {count} packets.")
+		if count > 0:
+			print(f"{time.asctime()}{pass_text}")
+		else:
+			print(f"{time.asctime()}{fail_text}")
 
 """
 Check the TEST_TX button transmits a packet with the correct callsign.
