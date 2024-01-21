@@ -63,7 +63,7 @@ print(f"{time.asctime()} Sending a UI Packet from {test_callsign} to {standard_c
 packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, 50)
 tx_metadata = vpacket.GetFrameMeta(packet)
 print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
-print(f"{time.asctime()} Packet payload: {str(metadata['Payload'])}")
+print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
 test_serial_port_obj.write(vpacket.EncodeKISSFrame(packet))
 time.sleep(1)
 count = 0
