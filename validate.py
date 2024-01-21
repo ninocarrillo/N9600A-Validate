@@ -193,8 +193,8 @@ count = 0
 while not test_serial_queue.empty():
 	packet = test_serial_queue.get()
 	metadata = vpacket.GetFrameMeta(packet)
-	print(f'{time.asctime()} TEST device heard packet from {metadata["SOURCE"]} to {metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
-	print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
+	print(f'{time.asctime()} TEST device heard packet from {metadata["SOURCE"]} to {metadata["DEST"]} CRC {metadata["CRC"]}.')
+	print(f"{time.asctime()} Packet payload: {str(metadata['Payload'])}")
 	count += 1
 print(f"TEST device heard {count} packets.")
 if count > 0:
