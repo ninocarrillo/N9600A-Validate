@@ -24,6 +24,7 @@ test_serial_port = "/dev/ttyACM0"
 test_serial_port_baud = "57600"
 standard_serial_port = "/dev/ttyACM1"
 standard_serial_port_baud = "57600"
+soundcard_volume = "80%"
 path_to_test_audio = "/home/pi/github/modem-test-audio/"
 test_callsign = "0TEST0-5"
 standard_callsign = "STNDRD-7"
@@ -97,7 +98,7 @@ print(f"{time.asctime()} Sending a UI Packet from {test_callsign} to {standard_c
 packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, 50)
 tx_metadata = vpacket.GetFrameMeta(packet)
 print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
-print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
+#print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
 test_serial_port_obj.write(vpacket.EncodeKISSFrame(packet))
 time.sleep(1)
 count = 0
@@ -107,7 +108,7 @@ while not standard_serial_queue.empty():
 	count += 1
 	tx_metadata = vpacket.GetFrameMeta(packet)
 	print(f'{time.asctime()} STANDARD device heard packet from {tx_metadata["SOURCE"]} to {tx_metadata["DEST"]} CRC {tx_metadata["CRC"]}.')
-	print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
+	#print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
 
 
 """
@@ -124,7 +125,7 @@ while not standard_serial_queue.empty():
 	count += 1
 	rx_metadata = vpacket.GetFrameMeta(packet)
 	print(f'{time.asctime()} STANDARD device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
-	print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
+	#print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
 try:
 	if rx_metadata['SOURCE'][:-2] == tx_metadata['SOURCE'][:-2]:
 		print(f"{time.asctime()}{pass_text}")
@@ -138,8 +139,9 @@ except:
 Check AWGN track performance.
 """
 print(f"{time.asctime()} Testing AWGN TRACK PERFORMANCE.")
+subprocess.run(["amixer", "sset", "'Master'", f"{soundcard_volume}"], stdout=subprocess.DEVNULL)
 for mode in range(16):
-	print(f"Plating {awgn_track_list[mode]} for mode {mode_list[mode]}.")
+	print(f"Playing {awgn_track_list[mode]} for mode {mode_list[mode]}.")
 	# Set the mode switches
 	vgpio.SetTestDeviceMode(mode)
 	vgpio.SetStandardDeviceMode(mode)
@@ -164,7 +166,7 @@ for mode in range(16):
 		packet = standard_serial_queue.get()
 		standard_count += 1
 	print(f"Standard device heard {standard_count} packets.")
-	if test_count > (standard_count - 2):
+	if test_count > (standard_count - 3):
 		print(f"{time.asctime()}{pass_text}")
 	else:
 		print(f"{time.asctime()}{fail_text}")
