@@ -98,13 +98,14 @@ try:
 		print(f"{time.asctime()} FAIL.")
 except:
 	print(f"{time.asctime()} FAIL.")
-
 print(f"{time.asctime()} Done.")
 
 
 
 vgpio.SetTestDeviceMode(4)
 vgpio.SetStandardDeviceMode(4)
+while not test_serial_queue.empty():
+	packet = test_serial_queue.get()
 time.sleep(2)
 subprocess.run(["aplay", path_to_test_audio + "2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
 
