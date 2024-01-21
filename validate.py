@@ -114,6 +114,7 @@ beacon_mode_list = [ 6,
 					-1,
 					12,
 					12,
+					6,
 					6 ]
 
 if sys.version_info < (3, 0):
