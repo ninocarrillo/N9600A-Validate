@@ -190,7 +190,7 @@ for mode in range(16):
 	vgpio.AssertTestTXButton()
 	time.sleep(.1)
 	vgpio.ReleaseTestTXButton()
-	time.sleep(200 * 8 / mode_bit_rate_list[mode])
+	time.sleep(400 * 8 / mode_bit_rate_list[mode])
 	count = 0
 	while not test_serial_queue.empty():
 		packet = test_serial_queue.get()
