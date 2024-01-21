@@ -71,11 +71,9 @@ start_time = time.time()
 while not standard_serial_queue.empty():
 	packet = standard_serial_queue.get()
 	count += 1
-	metadata = vpacket.GetFrameMeta(packet)
-	print(f'{time.asctime()} STANDARD device heard packet from {metadata["SOURCE"]} to {metadata["DEST"]} CRC {metadata["CRC"]}.')
-	print(f"{time.asctime()} Packet payload: {str(metadata['Payload'])}")
-	if time.time() - start_time > 2:
-		break
+	tx_metadata = vpacket.GetFrameMeta(packet)
+	print(f'{time.asctime()} STANDARD device heard packet from {tx_metadata["SOURCE"]} to {tx_metadata["DEST"]} CRC {tx_metadata["CRC"]}.')
+	print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
 print(f"{time.asctime()} Done.")
 
 """
@@ -87,15 +85,20 @@ time.sleep(.1)
 vgpio.ReleaseTestTXButton()
 time.sleep(2)
 count = 0
-start_time = time.time()
 while not standard_serial_queue.empty():
 	packet = standard_serial_queue.get()
 	count += 1
-	metadata = vpacket.GetFrameMeta(packet)
-	print(f'{time.asctime()} STANDARD device heard packet from {metadata["SOURCE"]} to {metadata["DEST"]} CRC {metadata["CRC"]}.')
-	print(f"{time.asctime()} Packet payload: {str(metadata['Payload'])}")
-	if time.time() - start_time > 2:
-		break
+	rx_metadata = vpacket.GetFrameMeta(packet)
+	print(f'{time.asctime()} STANDARD device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
+	print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
+try:
+	if rx_metadata['SOURCE'] == tx_metadata['SOURCE']:
+		print(f"{time.asctime()} PASS.")
+	else:
+		print(f"{time.asctime()} FAIL.")
+except:
+	print(f"{time.asctime()} FAIL.")
+
 print(f"{time.asctime()} Done.")
 
 
