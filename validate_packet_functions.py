@@ -200,7 +200,7 @@ def EncodeKISSFrame(packet):
 	kiss_output_frame = bytearray(FEND) + bytearray(KISS_TYPE_ID) + kiss_output_frame + bytearray(FEND)
 	return kiss_output_frame
 
-def GenerateUIPacket(source_callsign_string, dest_callsign_string, length):
+def GenerateUIPacket(source_callsign_string, dest_callsign_string, payload, length):
 	source_callsign = StringCallsignToArray(source_callsign_string)
 	dest_callsign = StringCallsignToArray(dest_callsign_string)
 
@@ -222,8 +222,15 @@ def GenerateUIPacket(source_callsign_string, dest_callsign_string, length):
 	# Add PID for No Layer 3:
 	packet.extend((0xF0).to_bytes(1,'big'))
 
-	for j in range(0, length):
-		rand = random.randint(32,126)
-		packet.extend(bytearray(rand.to_bytes(1,'big')))
+	# convert payload string to byte array
+	payload = bytes(payload, 'UTF-8')
+	for character in payload:
+		packet.extend(int(character))
+
+	random_count = length - len(payload)
+	if random_count > 0:
+		for j in range(0, length):
+			rand = random.randint(32,126)
+			packet.extend(bytearray(rand.to_bytes(1,'big')))
 
 	return packet

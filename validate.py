@@ -112,10 +112,10 @@ standard_serial_thread.start()
 Generate a UI frame to assign callsign to TEST device.
 """
 print(f"{time.asctime()} Sending a UI Packet from {test_callsign} to {standard_callsign} to set TEST device callsign.")
-packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, 50)
+packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 50)
 tx_metadata = vpacket.GetFrameMeta(packet)
 print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
-#print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
+print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
 test_serial_port_obj.write(vpacket.EncodeKISSFrame(packet))
 time.sleep(1)
 count = 0
@@ -125,7 +125,7 @@ while not standard_serial_queue.empty():
 	count += 1
 	tx_metadata = vpacket.GetFrameMeta(packet)
 	print(f'{time.asctime()} STANDARD device heard packet from {tx_metadata["SOURCE"]} to {tx_metadata["DEST"]} CRC {tx_metadata["CRC"]}.')
-	#print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
+	print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
 
 
 """
