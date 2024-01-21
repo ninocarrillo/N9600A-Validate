@@ -151,7 +151,7 @@ for mode in range(16):
 	while not standard_serial_queue.empty():
 		packet = standard_serial_queue.get()
 	# Play the appropriate track:
-	subprocess.run(["aplay", path_to_test_audio + awgn_track_list[mode]], stdout=subprocess.DEVNULL)
+	subprocess.run(["aplay", "-q", path_to_test_audio + awgn_track_list[mode]], stdout=subprocess.DEVNULL)
 	time.sleep(1)
 	# Count the received packets from each device:
 	test_count = 0
@@ -159,11 +159,11 @@ for mode in range(16):
 	while not test_serial_queue.empty():
 		packet = test_serial_queue.get()
 		test_count += 1
-		print(f"Test device heard {test_count} packets.")
+	print(f"Test device heard {test_count} packets.")
 	while not standard_serial_queue.empty():
 		packet = standard_serial_queue.get()
 		standard_count += 1
-		print(f"Standard device heard {standard_count} packets.")
+	print(f"Standard device heard {standard_count} packets.")
 	if test_count > (standard_count - 2):
 		print(f"{time.asctime()}{pass_text}")
 	else:
@@ -177,7 +177,7 @@ vgpio.SetStandardDeviceMode(4)
 while not test_serial_queue.empty():
 	packet = test_serial_queue.get()
 time.sleep(2)
-subprocess.run(["aplay", path_to_test_audio + "2_burst/GFSK_4800_IL2Pc_50b_10x.wav"], stdout=subprocess.DEVNULL)
+subprocess.run(["aplay", "-q", path_to_test_audio + "2_burst/GFSK_4800_IL2Pc_50b_10x.wav"], stdout=subprocess.DEVNULL)
 
 #vthread.popen_and_call(vthread.end_do_nothing, ["aplay", "/home/pi/github/modem-test-audio/2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
 
