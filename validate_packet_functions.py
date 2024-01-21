@@ -225,7 +225,7 @@ def GenerateUIPacket(source_callsign_string, dest_callsign_string, payload, leng
 	# convert payload string to byte array
 	payload = bytes(payload, 'UTF-8')
 	for character in payload:
-		packet.extend(character)
+		packet.extend(character.to_bytes(1, 'big))
 
 	random_count = length - len(payload)
 	if random_count > 0:
