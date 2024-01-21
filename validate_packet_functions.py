@@ -175,15 +175,15 @@ def StringCallsignToArray(input_string):
 	output[6] = ssid
 	return output
 
-def EncodeKISSFrame(packet):
+def EncodeKISSFrame(kiss_type_id, packet):
 	FESC = int(0xDB).to_bytes(1,'big')
 	FEND = int(0xC0).to_bytes(1,'big')
 	TFESC = int(0xDD).to_bytes(1,'big')
 	TFEND = int(0xDC).to_bytes(1,'big')
-	KISS_PORT = 0
-	KISS_COMMAND = 0
-	KISS_TYPE_ID = (KISS_PORT * 16) + KISS_COMMAND
-	KISS_TYPE_ID = KISS_TYPE_ID.to_bytes(1,'big')
+	#KISS_PORT = 0
+	#KISS_COMMAND = 0
+	#KISS_TYPE_ID = (KISS_PORT * 16) + KISS_COMMAND
+	KISS_TYPE_ID = kiss_type_id.to_bytes(1,'big')
 	frame_index = 0
 	kiss_output_frame = bytearray()
 	while(frame_index < len(packet)):

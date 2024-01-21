@@ -100,6 +100,22 @@ burst_track_list = ["2_burst/GFSK_9600_AX25_50b_10x.wav",
 			"2_burst/AFSK_300_IL2Pc_50b_10x.wav",
 			"2_burst/BPSK_1200_IL2P_50b_10x.wav" ]
 
+beacon_mode_list = [ 6,
+					6,
+					6,
+					6,
+					6,
+					6,
+					-1,
+					12,
+					12,
+					12,
+					12,
+					-1,
+					12,
+					12,
+					6 ]
+
 if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
 	sys.exit(1)
@@ -126,6 +142,40 @@ standard_serial_queue = queue.Queue()
 standard_serial_thread = threading.Thread(target=vserial.ParseKISSFromPort, args=([standard_serial_port_obj, standard_serial_queue]))
 standard_serial_thread.start()
 
+
+"""
+Check BEACON PACKET function.
+"""
+print(f"{time.asctime()} Testing BEACON FUNCTION in all applicable modes.")
+vthread.ClearQueue(standard_serial_queue)
+vthread.ClearQueue(test_serial_queue)
+for mode in range(16):
+	if beacon_mode_list[mode] > 0:
+		print(f"{time.asctime()} Mode {mode_list[mode]}.")
+		vgpio.SetTestDeviceMode(mode)
+		vgpio.SetStandardDeviceMode(beacon_mode_list[mode])
+		time.sleep(reset_time)
+		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,1)) # Set beacon interval to 1 minute
+		packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 0)
+		tx_metadata = vpacket.GetFrameMeta(packet)
+		print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
+		print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
+		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,packet))
+		time.sleep(120)
+		while not standard_serial_queue.empty():
+			packet = standard_serial_queue.get()
+			rx_metadata = vpacket.GetFrameMeta(packet)
+			print(f'{time.asctime()} STANDARD device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
+			print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
+			standard_count += 1
+		print(f"Standard device heard {standard_count} packets.")
+		if test_count > 0:
+			print(f"{time.asctime()}{pass_text}")
+		else:
+			print(f"{time.asctime()}{fail_text}")
+
+
+
 """
 Generate a UI frame to assign callsign to TEST device.
 """
@@ -136,7 +186,7 @@ packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to 
 tx_metadata = vpacket.GetFrameMeta(packet)
 print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
 print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
-test_serial_port_obj.write(vpacket.EncodeKISSFrame(packet))
+test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,packet))
 time.sleep(1)
 count = 0
 start_time = time.time()
@@ -280,51 +330,38 @@ for mode in range(16):
 	else:
 		print(f"{time.asctime()}{fail_text}")
 
-
-
-
-vgpio.SetTestDeviceMode(4)
-vgpio.SetStandardDeviceMode(4)
-while not test_serial_queue.empty():
-	packet = test_serial_queue.get()
-time.sleep(reset_time)
-subprocess.run(["aplay", "-q", path_to_test_audio + "2_burst/GFSK_4800_IL2Pc_50b_10x.wav"], stdout=subprocess.DEVNULL)
-
-#vthread.popen_and_call(vthread.end_do_nothing, ["aplay", "/home/pi/github/modem-test-audio/2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
-
-
-
-count = 0
-while not test_serial_queue.empty():
-	test_serial_queue.get()
-	count += 1
-	#print(test_serial_queue.get())
-print(f"Test device heard {count} frames.")
-
+"""
+Check BEACON PACKET function.
+"""
+print(f"{time.asctime()} Testing BEACON FUNCTION in all applicable modes.")
+vthread.ClearQueue(standard_serial_queue)
+vthread.ClearQueue(test_serial_queue)
 for mode in range(16):
-	vgpio.SetTestDeviceMode(mode)
-	vgpio.SetStandardDeviceMode(mode)
-	print(f"Generating test packet in MODE {format(mode, '04b')}")
-	time.sleep(2)
+	if beacon_mode_list[mode] > 0:
+		print(f"{time.asctime()} Mode {mode_list[mode]}.")
+		vgpio.SetTestDeviceMode(mode)
+		vgpio.SetStandardDeviceMode(beacon_mode_list[mode])
+		time.sleep(reset_time)
+		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,1)) # Set beacon interval to 1 minute
+		packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 0)
+		tx_metadata = vpacket.GetFrameMeta(packet)
+		print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
+		print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
+		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,packet))
+		time.sleep(120)
+		while not standard_serial_queue.empty():
+			packet = standard_serial_queue.get()
+			rx_metadata = vpacket.GetFrameMeta(packet)
+			print(f'{time.asctime()} STANDARD device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
+			print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
+			standard_count += 1
+		print(f"Standard device heard {standard_count} packets.")
+		if test_count > 0:
+			print(f"{time.asctime()}{pass_text}")
+		else:
+			print(f"{time.asctime()}{fail_text}")
 
-	vgpio.AssertTestTXButton()
-	time.sleep(.1)
-	vgpio.ReleaseTestTXButton()
-	time.sleep(5)
 
-
-count = 0
-while not standard_serial_queue.empty():
-	standard_serial_queue.get()
-	count += 1
-
-
-test_serial_port_obj.close()
-standard_serial_port_obj.close()
-test_serial_thread.join()
-standard_serial_thread.join()
-
-print(f"Standard device heard {count} frames.")
 
 vgpio.Cleanup()
 
