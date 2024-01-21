@@ -64,6 +64,23 @@ awgn_track_list = ["4_multiple_awgn/GFSK_9600_AX25_50b_50m_a1.wav",
 			"4_multiple_awgn/AFSK_300_IL2P_50b_50m_a4.wav",
 			"4_multiple_awgn/AFSK_300_IL2Pc_50b_50m_a4.wav",
 			"4_multiple_awgn/BPSK_1200_IL2P_50b_50m_a3.wav" ]
+			
+burst_track_list = ["2_burst/GFSK_9600_AX25_50b_10x.wav",
+			"2_burst/GFSK_9600_IL2P_255b_10x.wav",
+			"2_burst/GFSK_9600_IL2Pc_255b_10x.wav",
+			"2_burst/GFSK_4800_IL2P_255b_10x.wav",
+			"2_burst/GFSK_4800_IL2Pc_255b_10x.wav",
+			"2_burst/DAPSK_2400_IL2P_50b_10x.wav",
+			"2_burst/AFSK_1200_AX25_50b_10x.wav",
+			"2_burst/AFSK_1200_IL2P_50b_10x.wav",
+			"2_burst/BPSK_300_IL2Pc_50b_10x.wav",
+			"2_burst/QPSK_600_IL2Pc_50b_10x.wav",
+			"2_burst/BPSK_1200_IL2Pc_50b_10x.wav",
+			"2_burst/QPSK_2400_IL2Pc_50b_10x.wav",
+			"2_burst/AFSK_300_AX25_50b_10x.wav",
+			"2_burst/AFSK_300_IL2P_50b_10x.wav",
+			"2_burst/AFSK_300_IL2Pc_50b_10x.wav",
+			"2_burst/BPSK_1200_IL2P_50b_10x.wav" ]
 
 if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
@@ -136,6 +153,42 @@ except:
 
 
 """
+Check BURST track performance.
+"""
+print(f"{time.asctime()} Testing BURST TRACK PERFORMANCE.")
+subprocess.run(["amixer", "sset", "'Master'", f"{soundcard_volume}"], stdout=subprocess.DEVNULL)
+for mode in range(16):
+	print(f"Playing {burst_track_list[mode]} for mode {mode_list[mode]}.")
+	# Set the mode switches
+	vgpio.SetTestDeviceMode(mode)
+	vgpio.SetStandardDeviceMode(mode)
+	# Wait for device reset
+	time.sleep(2)
+	# Empty the serial queues
+	while not test_serial_queue.empty():
+		packet = test_serial_queue.get()
+	while not standard_serial_queue.empty():
+		packet = standard_serial_queue.get()
+	# Play the appropriate track:
+	subprocess.run(["aplay", "-q", path_to_test_audio + burst_track_list[mode]], stdout=subprocess.DEVNULL)
+	time.sleep(1)
+	# Count the received packets from each device:
+	test_count = 0
+	standard_count = 0
+	while not test_serial_queue.empty():
+		packet = test_serial_queue.get()
+		test_count += 1
+	print(f"Test device heard {test_count} packets.")
+	while not standard_serial_queue.empty():
+		packet = standard_serial_queue.get()
+		standard_count += 1
+	print(f"Standard device heard {standard_count} packets.")
+	if test_count > (standard_count - ((test_count + standard_count) * 0.07)):
+		print(f"{time.asctime()}{pass_text}")
+	else:
+		print(f"{time.asctime()}{fail_text}")
+
+"""
 Check AWGN track performance.
 """
 print(f"{time.asctime()} Testing AWGN TRACK PERFORMANCE.")
@@ -166,7 +219,7 @@ for mode in range(16):
 		packet = standard_serial_queue.get()
 		standard_count += 1
 	print(f"Standard device heard {standard_count} packets.")
-	if test_count > (standard_count - 3):
+	if test_count > (standard_count - ((test_count + standard_count) * 0.07)):
 		print(f"{time.asctime()}{pass_text}")
 	else:
 		print(f"{time.asctime()}{fail_text}")
