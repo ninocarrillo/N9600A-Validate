@@ -48,6 +48,22 @@ mode_list = ["GFSK_9600_AX25",
 			"AFSK_300_IL2Pc",
 			"BPSK_1200_IL2P" ]
 
+mode_bit_rate_list = [ 9600,
+					9600,
+					4800,
+					4800,
+					2400,
+					1200,
+					1200,
+					300,
+					600,
+					1200,
+					2400,
+					300,
+					300,
+					300,
+					1200 ]
+
 awgn_track_list = ["4_multiple_awgn/GFSK_9600_AX25_50b_50m_a1.wav",
 			"4_multiple_awgn/GFSK_9600_IL2Pc_50b_50m_a1.wav",
 			"4_multiple_awgn/GFSK_9600_IL2Pc_50b_50m_a1.wav",
@@ -158,26 +174,24 @@ except:
 """
 Check that the TEST_TX button sends a packet to the host over USB.
 """
-print(f"{time.asctime()} Testing USB TEST PACKET FUNCTION.")
-vthread.ClearQueue(standard_serial_queue)
-vthread.ClearQueue(test_serial_queue)
-vgpio.AssertTestTXButton()
-time.sleep(.1)
-vgpio.ReleaseTestTXButton()
-time.sleep(1)
-count = 0
-while not test_serial_queue.empty():
-	packet = test_serial_queue.get()
-	count += 1
-	rx_metadata = vpacket.GetFrameMeta(packet)
-	print(f'{time.asctime()} TEST device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
-	print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
-try:
-	if (rx_metadata['SOURCE'][:-2] == "TNC") and (rx_metadata['DEST'] == "USB"):
+print(f"{time.asctime()} Testing USB TEST PACKET FUNCTION and LOOPBACK TEST FUNCTION.")
+for mode in range(16):
+	vthread.ClearQueue(standard_serial_queue)
+	vthread.ClearQueue(test_serial_queue)
+	vgpio.AssertTestTXButton()
+	time.sleep(.1)
+	vgpio.ReleaseTestTXButton()
+	time.sleep(100 * 8 / mode_bit_rate_list[mode])
+	count = 0
+	while not test_serial_queue.empty():
+		packet = test_serial_queue.get()
+		count += 1
+		rx_metadata = vpacket.GetFrameMeta(packet)
+		print(f'{time.asctime()} TEST device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
+		#print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
+	if count < 2:
 		print(f"{time.asctime()}{pass_text}")
 	else:
-		print(f"{time.asctime()}{fail_text}")
-except:
 		print(f"{time.asctime()}{fail_text}")
 
 
