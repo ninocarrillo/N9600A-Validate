@@ -28,6 +28,7 @@ soundcard_volume = "80%"
 path_to_test_audio = "/home/pi/github/modem-test-audio/"
 test_callsign = "0TEST0-5"
 standard_callsign = "STNDRD-7"
+reset_time = 1.5
 pass_text = "......................................................................PASS"
 fail_text = "......................................................................FAIL"
 
@@ -49,6 +50,7 @@ mode_list = ["GFSK_9600_AX25",
 			"BPSK_1200_IL2P" ]
 
 mode_bit_rate_list = [ 9600,
+					9600,
 					9600,
 					4800,
 					4800,
@@ -108,7 +110,7 @@ and STANDARD device.
 """
 print(f"{time.asctime()} Initializing Raspberry Pi GPIO.")
 vgpio.SetupGPIO()
-time.sleep(2)
+time.sleep(reset_time)
 
 """
 Open serial port for TEST device and STANDARD device.
@@ -174,8 +176,15 @@ except:
 """
 Check that the TEST_TX button sends a packet to the host over USB.
 """
-print(f"{time.asctime()} Testing USB TEST PACKET FUNCTION and LOOPBACK TEST FUNCTION.")
+print(f"{time.asctime()} Testing USB TEST PACKET and LOOPBACK TEST in each mode.")
 for mode in range(16):
+	print(mode_list[mode])
+	# Set the mode switches
+	vgpio.SetTestDeviceMode(mode)
+	vgpio.SetStandardDeviceMode(mode)
+	# Wait for device reset
+	time.sleep(reset_time)
+	# Clear serial queues
 	vthread.ClearQueue(standard_serial_queue)
 	vthread.ClearQueue(test_serial_queue)
 	vgpio.AssertTestTXButton()
@@ -208,7 +217,7 @@ for mode in range(16):
 	vgpio.SetTestDeviceMode(mode)
 	vgpio.SetStandardDeviceMode(mode)
 	# Wait for device reset
-	time.sleep(2)
+	time.sleep(reset_time)
 	# Empty the serial queues
 	while not test_serial_queue.empty():
 		packet = test_serial_queue.get()
@@ -246,7 +255,7 @@ for mode in range(16):
 	vgpio.SetTestDeviceMode(mode)
 	vgpio.SetStandardDeviceMode(mode)
 	# Wait for device reset
-	time.sleep(2)
+	time.sleep(reset_time)
 	# Empty the serial queues
 	while not test_serial_queue.empty():
 		packet = test_serial_queue.get()
@@ -278,7 +287,7 @@ vgpio.SetTestDeviceMode(4)
 vgpio.SetStandardDeviceMode(4)
 while not test_serial_queue.empty():
 	packet = test_serial_queue.get()
-time.sleep(2)
+time.sleep(reset_time)
 subprocess.run(["aplay", "-q", path_to_test_audio + "2_burst/GFSK_4800_IL2Pc_50b_10x.wav"], stdout=subprocess.DEVNULL)
 
 #vthread.popen_and_call(vthread.end_do_nothing, ["aplay", "/home/pi/github/modem-test-audio/2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
