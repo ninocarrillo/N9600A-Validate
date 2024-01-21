@@ -47,7 +47,7 @@ mode_list = ["GFSK_9600_AX25",
 			"AFSK_300_IL2P",
 			"AFSK_300_IL2Pc",
 			"BPSK_1200_IL2P" ]
-			
+
 awgn_track_list = ["4_multiple_awgn/GFSK_9600_AX25_50b_50m_a1.wav",
 			"4_multiple_awgn/GFSK_9600_IL2Pc_50b_50m_a1.wav",
 			"4_multiple_awgn/GFSK_9600_IL2Pc_50b_50m_a1.wav",
@@ -64,7 +64,7 @@ awgn_track_list = ["4_multiple_awgn/GFSK_9600_AX25_50b_50m_a1.wav",
 			"4_multiple_awgn/AFSK_300_IL2P_50b_50m_a4.wav",
 			"4_multiple_awgn/AFSK_300_IL2Pc_50b_50m_a4.wav",
 			"4_multiple_awgn/BPSK_1200_IL2P_50b_50m_a3.wav" ]
-			
+
 burst_track_list = ["2_burst/GFSK_9600_AX25_50b_10x.wav",
 			"2_burst/GFSK_9600_IL2P_255b_10x.wav",
 			"2_burst/GFSK_9600_IL2Pc_255b_10x.wav",
@@ -129,7 +129,7 @@ while not standard_serial_queue.empty():
 
 
 """
-Check that the TEST_TX button generates a packet with the correct callsign.
+Check the TEST_TX button transmits a packet with the correct callsign.
 """
 print(f"{time.asctime()} Testing OWN DEVICE CALLSIGN ADOPTION.")
 vgpio.AssertTestTXButton()
@@ -145,6 +145,29 @@ while not standard_serial_queue.empty():
 	#print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
 try:
 	if rx_metadata['SOURCE'][:-2] == tx_metadata['SOURCE'][:-2]:
+		print(f"{time.asctime()}{pass_text}")
+	else:
+		print(f"{time.asctime()}{fail_text}")
+except:
+		print(f"{time.asctime()}{fail_text}")
+
+"""
+Check that the TEST_TX button sends a packet to the host over USB.
+"""
+print(f"{time.asctime()} Testing USB TEST PACKET FUNCTION.")
+vgpio.AssertTestTXButton()
+time.sleep(.1)
+vgpio.ReleaseTestTXButton()
+time.sleep(1)
+count = 0
+while not test_serial_queue.empty():
+	packet = test_serial_queue.get()
+	count += 1
+	rx_metadata = vpacket.GetFrameMeta(packet)
+	print(f'{time.asctime()} TEST device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
+	print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
+try:
+	if (rx_metadata['SOURCE'][:-2] == "TNC") and (rx_metadata['DEST'] == "USB"):
 		print(f"{time.asctime()}{pass_text}")
 	else:
 		print(f"{time.asctime()}{fail_text}")
@@ -223,9 +246,9 @@ for mode in range(16):
 		print(f"{time.asctime()}{pass_text}")
 	else:
 		print(f"{time.asctime()}{fail_text}")
-	
-		
-	
+
+
+
 
 vgpio.SetTestDeviceMode(4)
 vgpio.SetStandardDeviceMode(4)
