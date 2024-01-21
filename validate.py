@@ -112,6 +112,8 @@ standard_serial_thread.start()
 Generate a UI frame to assign callsign to TEST device.
 """
 print(f"{time.asctime()} Sending a UI Packet from {test_callsign} to {standard_callsign} to set TEST device callsign.")
+vthread.ClearQueue(standard_serial_queue)
+vthread.ClearQueue(test_serial_queue)
 packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 50)
 tx_metadata = vpacket.GetFrameMeta(packet)
 print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
@@ -132,6 +134,8 @@ while not standard_serial_queue.empty():
 Check the TEST_TX button transmits a packet with the correct callsign.
 """
 print(f"{time.asctime()} Testing OWN DEVICE CALLSIGN ADOPTION.")
+vthread.ClearQueue(standard_serial_queue)
+vthread.ClearQueue(test_serial_queue)
 vgpio.AssertTestTXButton()
 time.sleep(.1)
 vgpio.ReleaseTestTXButton()
@@ -155,6 +159,8 @@ except:
 Check that the TEST_TX button sends a packet to the host over USB.
 """
 print(f"{time.asctime()} Testing USB TEST PACKET FUNCTION.")
+vthread.ClearQueue(standard_serial_queue)
+vthread.ClearQueue(test_serial_queue)
 vgpio.AssertTestTXButton()
 time.sleep(.1)
 vgpio.ReleaseTestTXButton()
@@ -179,6 +185,8 @@ except:
 Check BURST track performance.
 """
 print(f"{time.asctime()} Testing BURST TRACK PERFORMANCE.")
+vthread.ClearQueue(standard_serial_queue)
+vthread.ClearQueue(test_serial_queue)
 subprocess.run(["amixer", "sset", "'Master'", f"{soundcard_volume}"], stdout=subprocess.DEVNULL)
 for mode in range(16):
 	print(f"Playing {burst_track_list[mode]} for mode {mode_list[mode]}.")
@@ -215,6 +223,8 @@ for mode in range(16):
 Check AWGN track performance.
 """
 print(f"{time.asctime()} Testing AWGN TRACK PERFORMANCE.")
+vthread.ClearQueue(standard_serial_queue)
+vthread.ClearQueue(test_serial_queue)
 subprocess.run(["amixer", "sset", "'Master'", f"{soundcard_volume}"], stdout=subprocess.DEVNULL)
 for mode in range(16):
 	print(f"Playing {awgn_track_list[mode]} for mode {mode_list[mode]}.")

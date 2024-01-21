@@ -11,6 +11,9 @@ import subprocess
 def end_do_nothing():
 	return
 
+def ClearQueue(q):
+	while not q.empty():
+		q.get()
 
 # adapted from https://stackoverflow.com/questions/2581817/python-subprocess-callback-when-cmd-exits
 def popen_and_call(on_exit, *popen_args):
