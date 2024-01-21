@@ -155,7 +155,7 @@ for mode in range(16):
 		vgpio.SetTestDeviceMode(mode)
 		vgpio.SetStandardDeviceMode(beacon_mode_list[mode])
 		time.sleep(reset_time)
-		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,1)) # Set beacon interval to 1 minute
+		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,[1])) # Set beacon interval to 1 minute
 		packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 0)
 		tx_metadata = vpacket.GetFrameMeta(packet)
 		print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
@@ -342,7 +342,7 @@ for mode in range(16):
 		vgpio.SetTestDeviceMode(mode)
 		vgpio.SetStandardDeviceMode(beacon_mode_list[mode])
 		time.sleep(reset_time)
-		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,1)) # Set beacon interval to 1 minute
+		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,[1])) # Set beacon interval to 1 minute
 		packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 0)
 		tx_metadata = vpacket.GetFrameMeta(packet)
 		print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
