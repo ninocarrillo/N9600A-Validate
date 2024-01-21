@@ -153,7 +153,7 @@ vthread.ClearQueue(test_serial_queue)
 packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 50)
 tx_metadata = vpacket.GetFrameMeta(packet)
 print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
-print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
+#print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
 test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,packet))
 time.sleep(1)
 count = 0
@@ -163,7 +163,7 @@ while not standard_serial_queue.empty():
 	count += 1
 	tx_metadata = vpacket.GetFrameMeta(packet)
 	print(f'{time.asctime()} STANDARD device heard packet from {tx_metadata["SOURCE"]} to {tx_metadata["DEST"]} CRC {tx_metadata["CRC"]}.')
-	print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
+	#print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
 
 """
 Check BEACON PACKET function.
@@ -368,6 +368,11 @@ for mode in range(16):
 			print(f"{time.asctime()}{fail_text}")
 
 
+
+test_serial_port_obj.close()
+standard_serial_port_obj.close()
+test_serial_thread.join()
+standard_serial_thread.join()
 
 vgpio.Cleanup()
 
