@@ -142,7 +142,6 @@ standard_serial_queue = queue.Queue()
 standard_serial_thread = threading.Thread(target=vserial.ParseKISSFromPort, args=([standard_serial_port_obj, standard_serial_queue]))
 standard_serial_thread.start()
 
-
 """
 Check BEACON PACKET function.
 """
@@ -155,7 +154,7 @@ for mode in range(16):
 		vgpio.SetTestDeviceMode(mode)
 		vgpio.SetStandardDeviceMode(beacon_mode_list[mode])
 		time.sleep(reset_time)
-		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,[1])) # Set beacon interval to 1 minute
+		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0x09, [0xF0, 0x01])) # Set beacon interval to 1 minute
 		packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 0)
 		tx_metadata = vpacket.GetFrameMeta(packet)
 		print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
@@ -174,7 +173,6 @@ for mode in range(16):
 			print(f"{time.asctime()}{pass_text}")
 		else:
 			print(f"{time.asctime()}{fail_text}")
-
 
 
 """
@@ -331,6 +329,8 @@ for mode in range(16):
 	else:
 		print(f"{time.asctime()}{fail_text}")
 
+
+
 """
 Check BEACON PACKET function.
 """
@@ -343,7 +343,7 @@ for mode in range(16):
 		vgpio.SetTestDeviceMode(mode)
 		vgpio.SetStandardDeviceMode(beacon_mode_list[mode])
 		time.sleep(reset_time)
-		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,[1])) # Set beacon interval to 1 minute
+		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0x09,[0xF0, 1])) # Set beacon interval to 1 minute
 		packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 0)
 		tx_metadata = vpacket.GetFrameMeta(packet)
 		print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
