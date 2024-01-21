@@ -112,10 +112,10 @@ beacon_mode_list = [ 6, # 0000 GFSK 9600 AX.25
 					12, # 1001 QPSK 600 IL2Pc
 					12, # 1010 BPSK 1200 IL2Pc
 					12, # 1011 QPSK 2400 IL2Pc
-					-1, # 1100 AFSK 300 AX.25 
+					-1, # 1100 AFSK 300 AX.25
 					-1, # 1101 AFSK 300 IL2P
 					-1, # 1110 AFSK 300 IL2Pc
-					6 ] # 1111 BPSK 1200 IL2P
+					12 ] # 1111 BPSK 1200 IL2P
 
 if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
