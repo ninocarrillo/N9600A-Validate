@@ -83,7 +83,7 @@ awgn_track_list = ["4_multiple_awgn/GFSK_9600_AX25_50b_50m_a1.wav",
 			"4_multiple_awgn/AFSK_300_IL2Pc_50b_50m_a4.wav",
 			"4_multiple_awgn/BPSK_1200_IL2P_50b_50m_a3.wav" ]
 
-burst_track_list = ["2_burst/GFSK_9600_AX25_50b_10x.wav",
+burst_track_list = ["2_burst/GFSK_9600_AX25_255b_10x.wav",
 			"2_burst/GFSK_9600_IL2P_255b_10x.wav",
 			"2_burst/GFSK_9600_IL2Pc_255b_10x.wav",
 			"2_burst/GFSK_4800_IL2P_255b_10x.wav",
