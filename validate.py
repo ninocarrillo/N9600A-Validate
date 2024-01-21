@@ -349,14 +349,15 @@ for mode in range(16):
 		print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
 		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,packet))
 		time.sleep(120)
+		count = 0
 		while not standard_serial_queue.empty():
 			packet = standard_serial_queue.get()
 			rx_metadata = vpacket.GetFrameMeta(packet)
 			print(f'{time.asctime()} STANDARD device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
 			print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
-			standard_count += 1
-		print(f"Standard device heard {standard_count} packets.")
-		if test_count > 0:
+			count += 1
+		print(f"Standard device heard {count} packets.")
+		if count > 0:
 			print(f"{time.asctime()}{pass_text}")
 		else:
 			print(f"{time.asctime()}{fail_text}")
