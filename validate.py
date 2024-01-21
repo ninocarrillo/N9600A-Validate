@@ -49,9 +49,9 @@ mode_list = ["GFSK_9600_AX25",
 			"BPSK_1200_IL2P" ]
 			
 awgn_track_list = ["4_multiple_awgn/GFSK_9600_AX25_50b_50m_a1.wav",
-			"4_multiple_awgn/GFSK_9600_IL2P_50b_50m_a1.wav",
 			"4_multiple_awgn/GFSK_9600_IL2Pc_50b_50m_a1.wav",
-			"4_multiple_awgn/GFSK_4800_IL2P_50b_50m_a2.wav",
+			"4_multiple_awgn/GFSK_9600_IL2Pc_50b_50m_a1.wav",
+			"4_multiple_awgn/GFSK_4800_IL2Pc_50b_50m_a2.wav",
 			"4_multiple_awgn/GFSK_4800_IL2Pc_50b_50m_a2.wav",
 			"4_multiple_awgn/DAPSK_2400_IL2P_50b_50m_a2.wav",
 			"4_multiple_awgn/AFSK_1200_AX25_50b_50m_a3.wav",
