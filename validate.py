@@ -177,7 +177,7 @@ vgpio.SetStandardDeviceMode(4)
 while not test_serial_queue.empty():
 	packet = test_serial_queue.get()
 time.sleep(2)
-subprocess.run(["aplay", path_to_test_audio + "2_burst/GFSK_4800_IL2Pc_50b_10x.wav"], stdout=open(os.devnull, 'wb')
+subprocess.run(["aplay", path_to_test_audio + "2_burst/GFSK_4800_IL2Pc_50b_10x.wav"], stdout=subprocess.DEVNULL)
 
 #vthread.popen_and_call(vthread.end_do_nothing, ["aplay", "/home/pi/github/modem-test-audio/2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
 
