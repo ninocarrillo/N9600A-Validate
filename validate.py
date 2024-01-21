@@ -27,8 +27,8 @@ standard_serial_port_baud = "57600"
 path_to_test_audio = "/home/pi/github/modem-test-audio/"
 test_callsign = "0TEST0-5"
 standard_callsign = "STNDRD-7"
-pass_text = "...................................PASS"
-fail_text = "...................................FAIL"
+pass_text = "......................................................................PASS"
+fail_text = "......................................................................FAIL"
 
 mode_list = ["GFSK_9600_AX25",
 			"GFSK_9600_IL2P",
@@ -134,14 +134,50 @@ except:
 		print(f"{time.asctime()}{fail_text}")
 
 
-
+"""
+Check AWGN track performance.
+"""
+print(f"{time.asctime()} Testing AWGN TRACK PERFORMANCE.")
+for mode in range(16):
+	print(f"Plating {awgn_track_list[mode]} for mode {mode_list[mode]}.")
+	# Set the mode switches
+	vgpio.SetTestDeviceMode(mode)
+	vgpio.SetStandardDeviceMode(mode)
+	# Wait for device reset
+	time.sleep(2)
+	# Empty the serial queues
+	while not test_serial_queue.empty():
+		packet = test_serial_queue.get()
+	while not standard_serial_queue.empty():
+		packet = standard_serial_queue.get()
+	# Play the appropriate track:
+	subprocess.run(["aplay", path_to_test_audio + awgn_track_list[mode]], stdout=open(os.devnull, 'wb')
+	time.sleep(1)
+	# Count the received packets from each device:
+	test_count = 0
+	standard_count = 0
+	while not test_serial_queue.empty():
+		packet = test_serial_queue.get()
+		test_count += 1
+		print(f"Test device heard {test_count} packets.")
+	while not standard_serial_queue.empty():
+		packet = standard_serial_queue.get()
+		standard_count += 1
+		print(f"Standard device heard {standard_count} packets.")
+	if test_count > (standard_count - 2):
+		print(f"{time.asctime()}{pass_text}")
+	else:
+		print(f"{time.asctime()}{fail_text}")
+	
+		
+	
 
 vgpio.SetTestDeviceMode(4)
 vgpio.SetStandardDeviceMode(4)
 while not test_serial_queue.empty():
 	packet = test_serial_queue.get()
 time.sleep(2)
-subprocess.run(["aplay", path_to_test_audio + "2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
+subprocess.run(["aplay", path_to_test_audio + "2_burst/GFSK_4800_IL2Pc_50b_10x.wav"], stdout=open(os.devnull, 'wb')
 
 #vthread.popen_and_call(vthread.end_do_nothing, ["aplay", "/home/pi/github/modem-test-audio/2_burst/GFSK_4800_IL2Pc_50b_10x.wav"])
 
