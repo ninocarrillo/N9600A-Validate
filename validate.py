@@ -27,6 +27,27 @@ standard_serial_port_baud = "57600"
 path_to_test_audio = "/home/pi/github/modem-test-audio/"
 test_callsign = "0TEST0-5"
 standard_callsign = "STNDRD-7"
+pass_text = "...................................PASS"
+fail_text = "...................................FAIL"
+
+mode_list = ["GFSK_9600_AX25",
+			"GFSK_9600_IL2P",
+			"GFSK_9600_IL2Pc",
+			"GFSK_4800_IL2P",
+			"GFSK_4800_IL2Pc",
+			"DAPSK_2400_IL2P",
+			"AFSK_1200_AX25",
+			"AFSK_1200_IL2P",
+			"BPSK_300_IL2Pc",
+			"QPSK_600_IL2Pc",
+			"BPSK_1200_IL2Pc",
+			"QPSK_2400_IL2Pc",
+			"AFSK_300_AX25",
+			"AFSK_300_IL2P",
+			"AFSK_300_IL2Pc",
+			"BPSK_1200_IL2P" ]
+			
+
 
 if sys.version_info < (3, 0):
 	print("Python version should be 3.x, exiting")
