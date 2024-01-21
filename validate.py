@@ -176,7 +176,7 @@ print(f"{time.asctime()} Mode {mode_list[mode]}.")
 vgpio.SetTestDeviceMode(mode)
 vgpio.SetStandardDeviceMode(beacon_mode_list[mode])
 time.sleep(reset_time)
-packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 0)
+packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "TARPNstat", 0)
 test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,packet))
 time.sleep(90)
 count = 0
