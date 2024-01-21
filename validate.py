@@ -151,7 +151,7 @@ for mode in range(16):
 	while not standard_serial_queue.empty():
 		packet = standard_serial_queue.get()
 	# Play the appropriate track:
-	subprocess.run(["aplay", path_to_test_audio + awgn_track_list[mode]], stdout=open(os.devnull, 'wb')
+	subprocess.run(["aplay", path_to_test_audio + awgn_track_list[mode]], stdout=subprocess.DEVNULL)
 	time.sleep(1)
 	# Count the received packets from each device:
 	test_count = 0
