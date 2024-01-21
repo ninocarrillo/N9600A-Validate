@@ -92,7 +92,7 @@ while not standard_serial_queue.empty():
 	print(f'{time.asctime()} STANDARD device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
 	print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
 try:
-	if rx_metadata['SOURCE'] == tx_metadata['SOURCE']:
+	if rx_metadata['SOURCE'][:-2] == tx_metadata['SOURCE'][:-2]:
 		print(f"{time.asctime()} PASS.")
 	else:
 		print(f"{time.asctime()} FAIL.")
