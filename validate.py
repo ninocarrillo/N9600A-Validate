@@ -190,7 +190,7 @@ for mode in range(16):
 	vgpio.AssertTestTXButton()
 	time.sleep(.1)
 	vgpio.ReleaseTestTXButton()
-	time.sleep(100 * 8 / mode_bit_rate_list[mode])
+	time.sleep(200 * 8 / mode_bit_rate_list[mode])
 	count = 0
 	while not test_serial_queue.empty():
 		packet = test_serial_queue.get()
@@ -198,7 +198,7 @@ for mode in range(16):
 		rx_metadata = vpacket.GetFrameMeta(packet)
 		print(f'{time.asctime()} TEST device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
 		#print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
-	if count < 2:
+	if count == 2:
 		print(f"{time.asctime()}{pass_text}")
 	else:
 		print(f"{time.asctime()}{fail_text}")
