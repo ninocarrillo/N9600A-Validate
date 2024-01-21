@@ -178,11 +178,13 @@ for mode in range(16):
 		time.sleep(reset_time)
 		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0x09, [0xF0, 0x01])) # Set beacon interval to 1 minute
 		packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 0)
-		tx_metadata = vpacket.GetFrameMeta(packet)
-		print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
+		#tx_metadata = vpacket.GetFrameMeta(packet)
+		#print(f"{time.asctime()} Packet CRC is {vpacket.GetCRC(packet)}.")
 		#print(f"{time.asctime()} Packet payload: {str(tx_metadata['Payload'])}")
 		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,packet))
-		time.sleep(120)
+		time.sleep(60)
+		test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,packet))
+		time.sleep(60)
 		count = 0
 		while not standard_serial_queue.empty():
 			packet = standard_serial_queue.get()
