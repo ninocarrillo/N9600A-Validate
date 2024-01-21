@@ -184,13 +184,15 @@ vgpio.SetTestDeviceMode(mode)
 vgpio.SetStandardDeviceMode(beacon_mode_list[mode])
 time.sleep(reset_time)
 packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, " TARPNstat", 0)
+print(f'{time.asctime()} TEST device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
+print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
 test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,packet))
 time.sleep(1)
 count = 0
 while not test_serial_queue.empty():
 	packet = test_serial_queue.get()
-	rx_metadata = vpacket.GetFrameMeta(packet)
-	print(f'{time.asctime()} TEST device heard packet from {rx_metadata["SOURCE"]} to {rx_metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
+	metadata = vpacket.GetFrameMeta(packet)
+	print(f'{time.asctime()} TEST device sending {metadata["SOURCE"]} to {metadata["DEST"]} CRC {rx_metadata["CRC"]}.')
 	print(f"{time.asctime()} Packet payload: {str(rx_metadata['Payload'])}")
 	count += 1
 print(f"TEST device heard {count} packets.")
