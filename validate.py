@@ -148,6 +148,13 @@ standard_serial_thread.start()
 Generate a UI frame to assign callsign to TEST device.
 """
 print(f"{time.asctime()} Sending a UI Packet from {test_callsign} to {standard_callsign} to set TEST device callsign.")
+# Set the mode switches
+mode = 1
+vgpio.SetTestDeviceMode(mode)
+vgpio.SetStandardDeviceMode(mode)
+# Wait for device reset
+time.sleep(reset_time)
+# Clear serial queues
 vthread.ClearQueue(standard_serial_queue)
 vthread.ClearQueue(test_serial_queue)
 packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, "nothing to see here ", 50)
@@ -197,6 +204,13 @@ else:
 Check the TEST_TX button transmits a packet with the correct callsign.
 """
 print(f"{time.asctime()} Testing OWN DEVICE CALLSIGN ADOPTION.")
+# Set the mode switches
+mode = 1
+vgpio.SetTestDeviceMode(mode)
+vgpio.SetStandardDeviceMode(mode)
+# Wait for device reset
+time.sleep(reset_time)
+# Clear serial queues
 vthread.ClearQueue(standard_serial_queue)
 vthread.ClearQueue(test_serial_queue)
 vgpio.AssertTestTXButton()
@@ -219,7 +233,7 @@ except:
 		print(f"{time.asctime()}{fail_text}")
 
 """
-Check that the TEST_TX button sends a packet to the host over USB.
+Check that the TEST_TX button sends a packet to the host over USB, and loopback works in each mode.
 """
 print(f"{time.asctime()} Testing USB TEST PACKET and LOOPBACK TEST in each mode.")
 for mode in range(16):
