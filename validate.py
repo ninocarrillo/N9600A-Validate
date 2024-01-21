@@ -185,7 +185,7 @@ vgpio.SetStandardDeviceMode(beacon_mode_list[mode])
 time.sleep(reset_time)
 packet = vpacket.GenerateUIPacket(test_callsign, standard_callsign, " TARPNstat", 0)
 test_serial_port_obj.write(vpacket.EncodeKISSFrame(0,packet))
-time.sleep(5)
+time.sleep(1)
 count = 0
 while not test_serial_queue.empty():
 	packet = test_serial_queue.get()
