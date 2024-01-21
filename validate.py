@@ -218,7 +218,7 @@ for mode in range(16):
 	# Clear serial queues
 	vthread.ClearQueue(standard_serial_queue)
 	vthread.ClearQueue(test_serial_queue)
-	repeat_count 3
+	repeat_count = 3
 	for repeat in range repeat_count:
 		vgpio.AssertTestTXButton()
 		time.sleep(.1)
