@@ -9,7 +9,7 @@ Scripts for automatic validation of N9600A firmware. The purpose of this project
 
 ## Hardware Requirements
 * Two NinoTNCs... I'm using an A4r1 and an A4r2 that I had laying around
-* Raspberry Pi with 40-pin header
+* Raspberry Pi with 40-pin header... I'm using a Pi4B
 * Pi-Hat prototyping board... I used [this one from Adafruit](https://www.adafruit.com/product/2310)
 * USB sound card... mine is a [Soundblaster Play! 3](https://www.amazon.com/Creative-Labs-70SB173000000-Sound-Blaster/dp/B06XBZ38ZJ/ref=sr_1_1?crid=2YAW4WUG3B18K&keywords=soundblaster+play+3&qid=1705937031&sprefix=soundblaster+play+3%2Caps%2C57&sr=8-1)
 * Insulated copper wire for connections... I used solid core from old ethernet cables
