@@ -18,6 +18,7 @@ Scripts for automatic validation of N9600A firmware. The purpose of this project
 * Two alligator clip leads to connect TXA and RXA between the TNCs
 * Some sort of mounting base and appropriate M2.5 or M3 hardware
 * Soldering iron and basic tools
+* Optionally, you can use a ZIF socket on the TEST TNC to make it easier to swap dsPICs. I don't recommend the one I used - the pins were too thick for the TNC PCB and it was a real pain to install it. The ZIF socket is not required for this test setup.
 
 ## TNC Switch Connections
 All four MODE switch signal lines from both TNCs are connected to individual Raspberry Pi GPIO pins via the Pi-Hat. I refer to the TNCs as "TEST" device (the TNC with firmware under validation) and "STANDARD" device (the TNC with an already-validated firmware version). The MODE switch pins closest to the edge of the PCB are the signal pins. When the MODE switches are all in the off position, these pins are only connected to the respective sampling pins on the dsPIC. The Raspberry Pi can drive these signal lines with its GPIO pins, allowing scripted MODE changes on each TNC. The Raspberry Pi GPIO lines are mapped to the TNC switches as follows:
