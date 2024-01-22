@@ -55,3 +55,15 @@ The TNC audio test loops are connected to provide a loopback on the TEST TNC and
 There are plenty of ways you can make connections to the Raspberry Pi GPIO pins, so use the method you prefer. I used the socket inserts of a machine-pin DIP socket to create removable points where I could insert test leads. I also added some LEDs and bias resistors to show which GPIO pins are active during the validation script. This is mostly for script debugging, but it's also interesting to watch.
 ![image](images/IMG_0373.jpeg)
 ![image](images/IMG_0382.jpeg)
+
+### Path to modem-test-audio Repository
+The validate.py script needs to know where to look for the audio files found in [modem-test-audio](https://github.com/ninocarrillo/modem-test-audio). By default, the script expects this repository to be "/home/pi/github/modem-test-audio/". This can be changed on line 28 of the script.
+
+### TNC Serial Port Enumeration
+The validate.py script also assumes the TEST TNC is /dev/ttyACM0 and the STANDARD TNC is /dev/ttyACM1. I place the USB cable for the TEST TNC in the top USB 2.0 port on the pi, and the STANDARD cable in the bottom port. USB 2.0 ports are black colored, USB 3.0 ports are blue. 
+![image](images/IMG_0376.jpeg)
+
+### Running the Script
+Just type:
+```python3 validate.py
+And watch the results!
