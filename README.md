@@ -65,5 +65,7 @@ The validate.py script also assumes the TEST TNC is /dev/ttyACM0 and the STANDAR
 
 ### Running the Script
 Just type:
-```python3 validate.py
-And watch the results!
+```
+python3 validate.py
+```
+And watch the results start to develop. Takes about an hour for the script to run right now, which might change as I add more tests.
