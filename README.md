@@ -26,7 +26,7 @@ All four MODE switch signal lines from both TNCs are connected to individual Ras
    * MODE2 <--> GPIO 18
    * MODE1 <--> GPIO 27
    * MODE0 <--> GPIO 22
-   * TESTTX <--> GPIO 23
+   * TESTTX <--> GPIO 23\
      Image of under side of TEST TNC. Connections on STANDARD TNC similar, but omit TESTTX:
     ![image](images/IMG_0378.jpeg)
 ### STANDARD device signals to Raspberry Pi GPIO:
