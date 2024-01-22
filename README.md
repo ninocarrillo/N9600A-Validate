@@ -17,4 +17,7 @@ Scripts for automatic validation of N9600A firmware. The purpose of this project
 * Optional LEDs and resistors for flashing lights on the Pi-Hat
 * Two alligator clip leads to connect TXA and RXA between the TNCs
 * Some sort of mounting base and appropriate M2.5 or M3 hardware
+* Soldering iron and basic tools
 
+  ## TNC Switch Connections
+  * All four MODE switch signal lines from both TNCs are connected to individual Raspberry Pi GPIO pins via the Pi-Hat.
