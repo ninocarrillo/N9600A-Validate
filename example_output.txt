@@ -1,0 +1,341 @@
+pi@voltaire:~/github/N9600A-Validate $ python3 validate.py
+Mon Jan 22 03:04:23 2024 Initializing Raspberry Pi GPIO.
+Mon Jan 22 03:04:25 2024 Opening TEST and STANDARD device serial ports, starting KISS reader threads.
+Mon Jan 22 03:04:25 2024 Sending a UI Packet from 0TEST0-5 to STNDRD-7 to set TEST device callsign.
+Mon Jan 22 03:04:27 2024 Packet CRC is 0x99ca.
+Mon Jan 22 03:04:28 2024 STANDARD device heard packet from 0TEST0-5 to STNDRD-7 CRC 0x99ca.
+Mon Jan 22 03:04:28 2024 Testing OWN DEVICE CALLSIGN ADOPTION.
+Mon Jan 22 03:04:31 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:04:31 2024......................................................................PASS
+Mon Jan 22 03:04:31 2024 Testing USB TEST PACKET and LOOPBACK TEST in each mode.
+GFSK_9600_AX25
+Mon Jan 22 03:04:37 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x826d.
+Mon Jan 22 03:04:37 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:04:37 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x2cf8.
+Mon Jan 22 03:04:37 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:04:37 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xb8d4.
+Mon Jan 22 03:04:37 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:04:37 2024......................................................................PASS
+GFSK_9600_IL2P
+Mon Jan 22 03:04:42 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x45d.
+Mon Jan 22 03:04:42 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:04:43 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xb302.
+Mon Jan 22 03:04:43 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:04:43 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x5bc9.
+Mon Jan 22 03:04:43 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:04:43 2024......................................................................PASS
+GFSK_9600_IL2Pc
+Mon Jan 22 03:04:48 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x2dc.
+Mon Jan 22 03:04:48 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:04:48 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x76ae.
+Mon Jan 22 03:04:48 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:04:48 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xa420.
+Mon Jan 22 03:04:48 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:04:48 2024......................................................................PASS
+GFSK_4800_IL2P
+Mon Jan 22 03:04:54 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xe6e4.
+Mon Jan 22 03:04:54 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:04:54 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x35d7.
+Mon Jan 22 03:04:54 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:04:54 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x9d7c.
+Mon Jan 22 03:04:55 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:04:55 2024......................................................................PASS
+GFSK_4800_IL2Pc
+Mon Jan 22 03:05:00 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x1c92.
+Mon Jan 22 03:05:00 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:05:01 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x299c.
+Mon Jan 22 03:05:01 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:05:01 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x39c5.
+Mon Jan 22 03:05:01 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:05:01 2024......................................................................PASS
+DAPSK_2400_IL2P
+Mon Jan 22 03:05:07 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xcb40.
+Mon Jan 22 03:05:07 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:05:07 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xb91e.
+Mon Jan 22 03:05:07 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:05:07 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xefb6.
+Mon Jan 22 03:05:07 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:05:07 2024......................................................................PASS
+AFSK_1200_AX25
+Mon Jan 22 03:05:15 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x9d1b.
+Mon Jan 22 03:05:15 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:05:15 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xf16.
+Mon Jan 22 03:05:15 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:05:15 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x8721.
+Mon Jan 22 03:05:15 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:05:15 2024......................................................................PASS
+AFSK_1200_IL2P
+Mon Jan 22 03:05:22 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x886c.
+Mon Jan 22 03:05:22 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:05:22 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3195.
+Mon Jan 22 03:05:22 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:05:22 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x7ab9.
+Mon Jan 22 03:05:22 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:05:22 2024......................................................................PASS
+BPSK_300_IL2Pc
+Mon Jan 22 03:05:36 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x1ae8.
+Mon Jan 22 03:05:36 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:05:36 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x995b.
+Mon Jan 22 03:05:36 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:05:36 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xbe99.
+Mon Jan 22 03:05:36 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:05:36 2024......................................................................PASS
+QPSK_600_IL2Pc
+Mon Jan 22 03:05:45 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x72d8.
+Mon Jan 22 03:05:45 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:05:45 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x7204.
+Mon Jan 22 03:05:45 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:05:45 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xa030.
+Mon Jan 22 03:05:45 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:05:45 2024......................................................................PASS
+BPSK_1200_IL2Pc
+Mon Jan 22 03:05:53 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xb128.
+Mon Jan 22 03:05:53 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:05:53 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x768c.
+Mon Jan 22 03:05:53 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:05:53 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xe9d0.
+Mon Jan 22 03:05:53 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:05:53 2024......................................................................PASS
+QPSK_2400_IL2Pc
+Mon Jan 22 03:06:00 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3c38.
+Mon Jan 22 03:06:00 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:06:00 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xb270.
+Mon Jan 22 03:06:00 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:06:00 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x758b.
+Mon Jan 22 03:06:00 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:06:00 2024......................................................................PASS
+AFSK_300_AX25
+Mon Jan 22 03:06:13 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x5b86.
+Mon Jan 22 03:06:13 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:06:13 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x1e9f.
+Mon Jan 22 03:06:13 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:06:13 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x1d00.
+Mon Jan 22 03:06:13 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:06:13 2024......................................................................PASS
+AFSK_300_IL2P
+Mon Jan 22 03:06:27 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6882.
+Mon Jan 22 03:06:27 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:06:27 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xe222.
+Mon Jan 22 03:06:27 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:06:27 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x63a9.
+Mon Jan 22 03:06:27 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:06:27 2024......................................................................PASS
+AFSK_300_IL2Pc
+Mon Jan 22 03:06:40 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x33a5.
+Mon Jan 22 03:06:40 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:06:40 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x72e9.
+Mon Jan 22 03:06:40 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:06:40 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x76b0.
+Mon Jan 22 03:06:40 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:06:40 2024......................................................................PASS
+BPSK_1200_IL2P
+Mon Jan 22 03:06:48 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xea8e.
+Mon Jan 22 03:06:48 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3f88.
+Mon Jan 22 03:06:48 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x742b.
+Mon Jan 22 03:06:48 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc797.
+Mon Jan 22 03:06:48 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x388b.
+Mon Jan 22 03:06:48 2024 TEST device heard packet from 0TEST0-0 to IDENT-0 CRC 0x6e34.
+Mon Jan 22 03:06:48 2024......................................................................PASS
+Mon Jan 22 03:06:48 2024 Testing BURST TRACK PERFORMANCE.
+Playing 2_burst/GFSK_9600_AX25_255b_10x.wav for mode GFSK_9600_AX25.
+Test device heard 10 packets.
+Standard device heard 9 packets.
+Mon Jan 22 03:06:54 2024......................................................................PASS
+Playing 2_burst/GFSK_9600_IL2P_255b_10x.wav for mode GFSK_9600_IL2P.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:07:00 2024......................................................................PASS
+Playing 2_burst/GFSK_9600_IL2Pc_255b_10x.wav for mode GFSK_9600_IL2Pc.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:07:07 2024......................................................................PASS
+Playing 2_burst/GFSK_4800_IL2P_255b_10x.wav for mode GFSK_4800_IL2P.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:07:15 2024......................................................................PASS
+Playing 2_burst/GFSK_4800_IL2Pc_255b_10x.wav for mode GFSK_4800_IL2Pc.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:07:24 2024......................................................................PASS
+Playing 2_burst/DAPSK_2400_IL2P_50b_10x.wav for mode DAPSK_2400_IL2P.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:07:31 2024......................................................................PASS
+Playing 2_burst/AFSK_1200_AX25_50b_10x.wav for mode AFSK_1200_AX25.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:07:39 2024......................................................................PASS
+Playing 2_burst/AFSK_1200_IL2P_50b_10x.wav for mode AFSK_1200_IL2P.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:07:48 2024......................................................................PASS
+Playing 2_burst/BPSK_300_IL2Pc_50b_10x.wav for mode BPSK_300_IL2Pc.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:08:15 2024......................................................................PASS
+Playing 2_burst/QPSK_600_IL2Pc_50b_10x.wav for mode QPSK_600_IL2Pc.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:08:31 2024......................................................................PASS
+Playing 2_burst/BPSK_1200_IL2Pc_50b_10x.wav for mode BPSK_1200_IL2Pc.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:08:41 2024......................................................................PASS
+Playing 2_burst/QPSK_2400_IL2Pc_50b_10x.wav for mode QPSK_2400_IL2Pc.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:08:47 2024......................................................................PASS
+Playing 2_burst/AFSK_300_AX25_50b_10x.wav for mode AFSK_300_AX25.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:09:10 2024......................................................................PASS
+Playing 2_burst/AFSK_300_IL2P_50b_10x.wav for mode AFSK_300_IL2P.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:09:36 2024......................................................................PASS
+Playing 2_burst/AFSK_300_IL2Pc_50b_10x.wav for mode AFSK_300_IL2Pc.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:10:04 2024......................................................................PASS
+Playing 2_burst/BPSK_1200_IL2P_50b_10x.wav for mode BPSK_1200_IL2P.
+Test device heard 10 packets.
+Standard device heard 10 packets.
+Mon Jan 22 03:10:13 2024......................................................................PASS
+Mon Jan 22 03:10:13 2024 Testing AWGN TRACK PERFORMANCE.
+Playing 4_multiple_awgn/GFSK_9600_AX25_50b_50m_a1.wav for mode GFSK_9600_AX25.
+Test device heard 28 packets.
+Standard device heard 27 packets.
+Mon Jan 22 03:11:07 2024......................................................................PASS
+Playing 4_multiple_awgn/GFSK_9600_IL2Pc_50b_50m_a1.wav for mode GFSK_9600_IL2P.
+Test device heard 39 packets.
+Standard device heard 37 packets.
+Mon Jan 22 03:12:02 2024......................................................................PASS
+Playing 4_multiple_awgn/GFSK_9600_IL2Pc_50b_50m_a1.wav for mode GFSK_9600_IL2Pc.
+Test device heard 43 packets.
+Standard device heard 41 packets.
+Mon Jan 22 03:12:56 2024......................................................................PASS
+Playing 4_multiple_awgn/GFSK_4800_IL2Pc_50b_50m_a2.wav for mode GFSK_4800_IL2P.
+Test device heard 31 packets.
+Standard device heard 30 packets.
+Mon Jan 22 03:13:50 2024......................................................................PASS
+Playing 4_multiple_awgn/GFSK_4800_IL2Pc_50b_50m_a2.wav for mode GFSK_4800_IL2Pc.
+Test device heard 36 packets.
+Standard device heard 36 packets.
+Mon Jan 22 03:14:44 2024......................................................................PASS
+Playing 4_multiple_awgn/DAPSK_2400_IL2P_50b_50m_a2.wav for mode DAPSK_2400_IL2P.
+Test device heard 33 packets.
+Standard device heard 37 packets.
+Mon Jan 22 03:15:38 2024......................................................................PASS
+Playing 4_multiple_awgn/AFSK_1200_AX25_50b_50m_a3.wav for mode AFSK_1200_AX25.
+Test device heard 19 packets.
+Standard device heard 19 packets.
+Mon Jan 22 03:16:58 2024......................................................................PASS
+Playing 4_multiple_awgn/AFSK_1200_IL2P_50b_50m_a3.wav for mode AFSK_1200_IL2P.
+Test device heard 30 packets.
+Standard device heard 31 packets.
+Mon Jan 22 03:18:17 2024......................................................................PASS
+Playing 4_multiple_awgn/BPSK_300_IL2Pc_50b_50m_a4.wav for mode BPSK_300_IL2Pc.
+Test device heard 46 packets.
+Standard device heard 45 packets.
+Mon Jan 22 03:20:57 2024......................................................................PASS
+Playing 4_multiple_awgn/QPSK_600_IL2Pc_50b_50m_a4.wav for mode QPSK_600_IL2Pc.
+Test device heard 21 packets.
+Standard device heard 20 packets.
+Mon Jan 22 03:23:37 2024......................................................................PASS
+Playing 4_multiple_awgn/BPSK_1200_IL2Pc_50b_50m_a3.wav for mode BPSK_1200_IL2Pc.
+Test device heard 23 packets.
+Standard device heard 23 packets.
+Mon Jan 22 03:24:57 2024......................................................................PASS
+Playing 4_multiple_awgn/QPSK_2400_IL2Pc_50b_50m_a5.wav for mode QPSK_2400_IL2Pc.
+Test device heard 23 packets.
+Standard device heard 22 packets.
+Mon Jan 22 03:26:16 2024......................................................................PASS
+Playing 4_multiple_awgn/AFSK_300_AX25_50b_50m_a4.wav for mode AFSK_300_AX25.
+Test device heard 13 packets.
+Standard device heard 13 packets.
+Mon Jan 22 03:28:56 2024......................................................................PASS
+Playing 4_multiple_awgn/AFSK_300_IL2P_50b_50m_a4.wav for mode AFSK_300_IL2P.
+Test device heard 28 packets.
+Standard device heard 29 packets.
+Mon Jan 22 03:31:36 2024......................................................................PASS
+Playing 4_multiple_awgn/AFSK_300_IL2Pc_50b_50m_a4.wav for mode AFSK_300_IL2Pc.
+Test device heard 41 packets.
+Standard device heard 42 packets.
+Mon Jan 22 03:34:16 2024......................................................................PASS
+Playing 4_multiple_awgn/BPSK_1200_IL2P_50b_50m_a3.wav for mode BPSK_1200_IL2P.
+Test device heard 26 packets.
+Standard device heard 26 packets.
+Mon Jan 22 03:35:36 2024......................................................................PASS
+Mon Jan 22 03:35:36 2024 Testing BEACON FUNCTION in all applicable modes.
+Mon Jan 22 03:35:36 2024 Mode GFSK_9600_AX25.
+Mon Jan 22 03:37:38 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0xc3f4.
+Mon Jan 22 03:37:38 2024 Packet payload: bytearray(b':0TEST0 GFSK 9600')
+Standard device heard 1 packets.
+Mon Jan 22 03:37:38 2024......................................................................PASS
+Mon Jan 22 03:37:38 2024 Mode GFSK_9600_IL2P.
+Mon Jan 22 03:39:40 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0xad3a.
+Mon Jan 22 03:39:40 2024 Packet payload: bytearray(b':0TEST0 GFSK 9600 IL2P https://tarpn.net/IL2P')
+Standard device heard 1 packets.
+Mon Jan 22 03:39:40 2024......................................................................PASS
+Mon Jan 22 03:39:40 2024 Mode GFSK_9600_IL2Pc.
+Mon Jan 22 03:41:42 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0x7b30.
+Mon Jan 22 03:41:42 2024 Packet payload: bytearray(b':0TEST0 GFSK 9600 IL2P+CRC https://tarpn.net/IL2P')
+Standard device heard 1 packets.
+Mon Jan 22 03:41:42 2024......................................................................PASS
+Mon Jan 22 03:41:42 2024 Mode GFSK_4800_IL2P.
+Mon Jan 22 03:43:44 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0x3bbe.
+Mon Jan 22 03:43:44 2024 Packet payload: bytearray(b':0TEST0 GFSK 4800 IL2P https://tarpn.net/IL2P')
+Standard device heard 1 packets.
+Mon Jan 22 03:43:44 2024......................................................................PASS
+Mon Jan 22 03:43:44 2024 Mode GFSK_4800_IL2Pc.
+Mon Jan 22 03:45:46 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0x7b12.
+Mon Jan 22 03:45:46 2024 Packet payload: bytearray(b':0TEST0 GFSK 4800 IL2P+CRC https://tarpn.net/IL2P')
+Standard device heard 1 packets.
+Mon Jan 22 03:45:46 2024......................................................................PASS
+Mon Jan 22 03:45:46 2024 Mode DAPSK_2400_IL2P.
+Mon Jan 22 03:47:48 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0xbf0d.
+Mon Jan 22 03:47:48 2024 Packet payload: bytearray(b':0TEST0 DAPSK 2400 IL2P https://tarpn.net/IL2P')
+Standard device heard 1 packets.
+Mon Jan 22 03:47:48 2024......................................................................PASS
+Mon Jan 22 03:47:48 2024 Mode AFSK_1200_IL2P.
+Mon Jan 22 03:49:50 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0x870b.
+Mon Jan 22 03:49:50 2024 Packet payload: bytearray(b':0TEST0 AFSK 1200 IL2P https://tarpn.net/IL2P')
+Standard device heard 1 packets.
+Mon Jan 22 03:49:50 2024......................................................................PASS
+Mon Jan 22 03:49:50 2024 Mode BPSK_300_IL2Pc.
+Mon Jan 22 03:51:52 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0xb063.
+Mon Jan 22 03:51:52 2024 Packet payload: bytearray(b':0TEST0 BPSK 300 IL2P+CRC https://tarpn.net/IL2P')
+Standard device heard 1 packets.
+Mon Jan 22 03:51:52 2024......................................................................PASS
+Mon Jan 22 03:51:52 2024 Mode QPSK_600_IL2Pc.
+Mon Jan 22 03:53:54 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0x7850.
+Mon Jan 22 03:53:54 2024 Packet payload: bytearray(b':0TEST0 QPSK 600 IL2P+CRC https://tarpn.net/IL2P')
+Standard device heard 1 packets.
+Mon Jan 22 03:53:54 2024......................................................................PASS
+Mon Jan 22 03:53:54 2024 Mode BPSK_1200_IL2Pc.
+Mon Jan 22 03:55:56 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0x376c.
+Mon Jan 22 03:55:56 2024 Packet payload: bytearray(b':0TEST0 BPSK 1200 IL2P+CRC https://tarpn.net/IL2P')
+Standard device heard 1 packets.
+Mon Jan 22 03:55:56 2024......................................................................PASS
+Mon Jan 22 03:55:56 2024 Mode QPSK_2400_IL2Pc.
+Mon Jan 22 03:57:58 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0xebbb.
+Mon Jan 22 03:57:58 2024 Packet payload: bytearray(b':0TEST0 QPSK 2400 IL2P+CRC https://tarpn.net/IL2P')
+Standard device heard 1 packets.
+Mon Jan 22 03:57:58 2024......................................................................PASS
+Mon Jan 22 03:57:58 2024 Mode BPSK_1200_IL2P.
+Mon Jan 22 04:00:00 2024 STANDARD device heard packet from 0TEST0-0 to IDENT-0 CRC 0x2430.
+Mon Jan 22 04:00:00 2024 Packet payload: bytearray(b':0TEST0 BPSK 1200 IL2P https://tarpn.net/IL2P')
+Standard device heard 1 packets.
+Mon Jan 22 04:00:00 2024......................................................................PASS
+Mon Jan 22 04:00:00 2024 Testing BEACON DISABLE FUNCTION.
+Mon Jan 22 04:00:00 2024 Mode GFSK_9600_IL2P.
+Standard device heard 0 packets.
+Mon Jan 22 04:02:02 2024......................................................................PASS
+Mon Jan 22 04:02:02 2024 Testing TARPNstat auto host meta-frame.
+Mon Jan 22 04:02:02 2024 Mode GFSK_9600_IL2P.
+Mon Jan 22 04:02:04 2024 TEST device sending 0TEST0-5 to STNDRD-7 CRC 0x2d6e.
+Mon Jan 22 04:02:04 2024 Packet payload: bytearray(b' TARPNstat')
+Mon Jan 22 04:02:05 2024 TEST device heard packet from TNC-0 to USB-0 CRC 0x4b5a.
+Mon Jan 22 04:02:05 2024 Packet payload: bytearray(b'=00:4.35=01:\x00\x00\x00\x00\x00\x00\x00\x00=02:0001E4C0=03:00000004=04:00000001=06:00000001=07:00000000=08:00000000=09:00000000=0A:00000003=0B:00000033=0C:001DA27E=0D:0000017E=0E:000003E8=0F:00000000=10:00000062=11:00000000')
+TEST device heard 1 packets.
+Mon Jan 22 04:02:05 2024......................................................................PASS
