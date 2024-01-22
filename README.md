@@ -27,4 +27,4 @@ All four MODE switch signal lines from both TNCs are connected to individual Ras
    * MODE1 <--> GPIO 27
    * MODE0 <--> GPIO 22
    * TESTTX <--> GPIO 23
-    
+    ![image](images/IMG_0378.jpeg)
