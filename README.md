@@ -64,8 +64,8 @@ The validate.py script needs to know where to look for the audio files found in 
 The validate.py script also assumes the TEST TNC is /dev/ttyACM0 and the STANDARD TNC is /dev/ttyACM1. I place the USB cable for the TEST TNC in the top USB 2.0 port on the pi, and the STANDARD cable in the bottom port. USB 2.0 ports are black colored, USB 3.0 ports are blue. Putting the respective cables in these slots has consistently caused the TNCs to enumerate where I expect them to.
 ![image](images/IMG_0376.jpeg)
 
-### TNC Control Connections
-Set both potentiometers on both TNCs to about midrange. This is not critical. Also set the SIGNALS DIP switch on both TNCs to 1100.
+### TNC Control Settings
+Set both potentiometers on both TNCs to about midrange. This is not critical. Set the SIGNALS DIP switch on both TNCs to 1100. Set the MODE DIP switch on both TNCs to 0000.
 
 ### Running the Script
 Just type:
