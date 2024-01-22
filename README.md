@@ -21,7 +21,7 @@ Scripts for automatic validation of N9600A firmware. The purpose of this project
 
 ## TNC Switch Connections
 All four MODE switch signal lines from both TNCs are connected to individual Raspberry Pi GPIO pins via the Pi-Hat. I refer to the TNCs as "TEST" device (the TNC with firmware under validation) and "STANDARD" device (the TNC with an already-validated firmware version). The MODE switch pins closest to the edge of the PCB are the signal pins. When the MODE switches are all in the off position, these pins are only connected to the respective sampling pins on the dsPIC. The Raspberry Pi can drive these signal lines with its GPIO pins, allowing scripted MODE changes on each TNC. The Raspberry Pi GPIO lines are mapped to the TNC switches as follows:
-### TEST device signals to Raspberry Pi GPIO:
+### TEST Device Dignals to Raspberry Pi GPIO:
    * MODE3 <--> GPIO 17
    * MODE2 <--> GPIO 18
    * MODE1 <--> GPIO 27
@@ -29,10 +29,24 @@ All four MODE switch signal lines from both TNCs are connected to individual Ras
    * TESTTX <--> GPIO 23\
      Image of under side of TEST TNC. Connections on STANDARD TNC similar, but omit TESTTX:
     ![image](images/IMG_0378.jpeg)
-### STANDARD device signals to Raspberry Pi GPIO:
+### STANDARD Device Signals to Raspberry Pi GPIO:
   * MODE3 <--> GPIO 24
   * MODE2 <--> GPIO 25
   * MODE1 <--> GPIO 5
   * MODE0 <--> GPIO 6  
 
 Don't forget to make a common ground connection between the two TNCs and the Pi. Optionally, you can use some sort of connector to make the wire bundle detachable from the Pi-Hat. I used DE-9 male and female connectors for this purpose, Since there are 9 signals in this scheme, I soldered the ground wires to both of the DE-9 metal shields.
+
+### Audio Connection to TEST TNC DE-9:
+I use a USB sound card to provide an audio interface to the Raspberry Pi. Mine uses a Tip-Ring-Ring-Sleeve (TRRS) connector for audio signals in and out. I think the TRRS pinout is fairly standard for these types of devices. 
+  * TIP (Left Audio Channel from DAC) <--> TNC pin 5 (RXA)
+  * RING (Right Audio Channel from DAC) <--> No Connection
+  * RING (Ground) <--> TNC pin 6 (Ground)
+  * SLEEVE (Microphone) <--> TNC pin 1 (TXA)  
+
+### Alligator Clip Leads
+The TNC audio test loops are connected to provide a loopback on the TEST TNC and allow the STANDARD TNC to decode packets sent by the TEST TNC. I use two alligator clip leads to make these connections.
+  * TEST TNC TXA <--> TEST TNC RXA
+  * TEST TNC TXA <--> STANDARD TNC RXA  
+  ![image](images/IMG_0374.jpeg)  
+  ![image](images/IMG_0375.jpeg)
