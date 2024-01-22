@@ -50,3 +50,8 @@ The TNC audio test loops are connected to provide a loopback on the TEST TNC and
   * TEST TNC TXA <--> STANDARD TNC RXA  
   ![image](images/IMG_0374.jpeg)  
   ![image](images/IMG_0375.jpeg)
+
+### GPIO Connections on the Pi-Hat
+There are plenty of ways you can make connections to the Raspberry Pi GPIO pins, so use the method you prefer. I used the socket inserts of a machine-pin DIP socket to create removable points where I could insert test leads. I also added some LEDs and bias resistors to show which GPIO pins are active during the validation script. This is mostly for script debugging, but it's also interesting to watch.
+![image](images/IMG_0373.jpeg)
+![image](images/IMG_0382.jpeg)
