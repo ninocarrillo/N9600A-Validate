@@ -61,7 +61,7 @@ There are plenty of ways you can make connections to the Raspberry Pi GPIO pins,
 The validate.py script needs to know where to look for the audio files found in [modem-test-audio](https://github.com/ninocarrillo/modem-test-audio). By default, the script expects this repository to be "/home/pi/github/modem-test-audio/". This can be changed on line 28 of the script.
 
 ### TNC Serial Port Enumeration
-The validate.py script also assumes the TEST TNC is /dev/ttyACM0 and the STANDARD TNC is /dev/ttyACM1. I place the USB cable for the TEST TNC in the top USB 2.0 port on the pi, and the STANDARD cable in the bottom port. USB 2.0 ports are black colored, USB 3.0 ports are blue. 
+The validate.py script also assumes the TEST TNC is /dev/ttyACM0 and the STANDARD TNC is /dev/ttyACM1. I place the USB cable for the TEST TNC in the top USB 2.0 port on the pi, and the STANDARD cable in the bottom port. USB 2.0 ports are black colored, USB 3.0 ports are blue. Putting the respective cables in these slots has consistently caused the TNCs to enumerate where I expect them to.
 ![image](images/IMG_0376.jpeg)
 
 ### TNC Control Connections
