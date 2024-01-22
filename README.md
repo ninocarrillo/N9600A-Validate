@@ -34,4 +34,4 @@ All four MODE switch signal lines from both TNCs are connected to individual Ras
   * MODE2 <--> GPIO 25
   * MODE1 <--> GPIO 5
   * MODE0 <--> GPIO 6\
-    Don't forget to make a common ground connection between the two TNCs and the Pi. Optionally, you can use some sort of connector to make the wire bundle detachable from the Pi-Hat. I used DE-9 male and female connectors for this purpose, Since there are 9 signals in this scheme, I soldered the ground wires to both of the DE-9 metal shields.
+Don't forget to make a common ground connection between the two TNCs and the Pi. Optionally, you can use some sort of connector to make the wire bundle detachable from the Pi-Hat. I used DE-9 male and female connectors for this purpose, Since there are 9 signals in this scheme, I soldered the ground wires to both of the DE-9 metal shields.
