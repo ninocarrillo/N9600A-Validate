@@ -72,4 +72,4 @@ Just type:
 ```
 python3 validate.py
 ```
-And watch the results start to develop. Takes about an hour for the script to run right now, which might change as I add more tests.
+And watch the results start to develop. Takes about an hour for the script to run right now, which might change as I add more tests. Take a look at [example_output.txt](example_output.txt) to see a test run.
