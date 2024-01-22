@@ -19,5 +19,11 @@ Scripts for automatic validation of N9600A firmware. The purpose of this project
 * Some sort of mounting base and appropriate M2.5 or M3 hardware
 * Soldering iron and basic tools
 
-  ## TNC Switch Connections
-  * All four MODE switch signal lines from both TNCs are connected to individual Raspberry Pi GPIO pins via the Pi-Hat.
+## TNC Switch Connections
+All four MODE switch signal lines from both TNCs are connected to individual Raspberry Pi GPIO pins via the Pi-Hat. I refer to the TNCs as "TEST" device (the TNC with firmware under validation) and "STANDARD" device (the TNC with an already-validated firmware version). The MODE switch pins closest to the edge of the PCB are the signal pins. When the MODE switches are all in the off position, these pins are only connected to the respective sampling pins on the dsPIC. The Raspberry Pi can drive these signal lines with its GPIO pins, allowing scripted MODE changes on each TNC. The Raspberry Pi GPIO lines are mapped to the TNC switches as follows:
+  * TEST device MODE switch pins to Raspberry Pi GPIO:
+  ** PIN 1 <--> GPIO 17
+  ** PIN 2 <--> GPIO 18
+  ** PIN 3 <--> GPIO 27
+  ** PIN 4 <--> GPIO 22
+    
